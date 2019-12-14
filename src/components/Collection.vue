@@ -8,11 +8,9 @@
           <button style="border-radius: 20px" class="btn btn-dark">+ Add Release</button>
         </router-link>
       </div>
-      <div style="margin: 20px 0">
-        
-      </div>
       <div>
         <b-table
+          no-border-collapse
           :tbody-tr-class="rowClass"
           :items="items"
           :fields="fields"
@@ -174,14 +172,3 @@
     }
   }
 </script>
-
-<style scoped>
-  .b-table-sticky-header {
-    max-height: 100%;
-    overflow-y: inherit;
-  }
-
-  .table th {
-    border-top: 0!important;
-  }
-</style>
