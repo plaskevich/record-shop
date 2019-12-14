@@ -84,7 +84,8 @@
       <b-modal id="discogsModal" hide-header @ok="addFromDiscogs(discogsId)">
           <div class="d-block text-center">
             <h5>Enter the release ID:</h5>
-            <b-form-input autofocus class="offset-sm-3 col-sm-6" v-model="discogsId" style="border: 1px solid #343a40">
+            <small><i class="text-muted">e.g. /Pink-Floyd-The-Dark-Side-Of-The-Moon/release/<span style="font-size: 13px" class="text-danger font-weight-bold">367104</span></i></small>
+            <b-form-input autofocus class="mt-3 offset-sm-3 col-sm-6" v-model="discogsId" style="border: 1px solid #343a40">
             </b-form-input>
           </div>
         </b-modal>

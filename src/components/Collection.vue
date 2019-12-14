@@ -10,7 +10,6 @@
       </div>
       <div>
         <b-table
-          no-border-collapse
           :tbody-tr-class="rowClass"
           :items="items"
           :fields="fields"
@@ -172,3 +171,7 @@
     }
   }
 </script>
+
+<style lang="css">
+  
+</style>
