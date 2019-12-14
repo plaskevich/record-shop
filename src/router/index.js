@@ -4,6 +4,7 @@ import Collection from '@/components/Collection'
 import Login from '@/components/Login'
 import EditRelease from '@/components/EditRelease'
 import ViewRelease from '@/components/ViewRelease'
+import Settings from '@/components/Settings'
 import firebase from 'firebase/app';
 import 'firebase/auth';
 
@@ -44,6 +45,11 @@ const router = new Router({
       name: 'view-release',
       component: ViewRelease,
       props: { editable: true }
+    },
+    {
+      path: '/settings',
+      name: 'settings',
+      component: Settings,
     }
   ]
 })
