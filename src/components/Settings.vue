@@ -102,7 +102,7 @@
   }
 </script>
 
-<style lang="scss">
+<style lang="scss" scopedSlots>
   @keyframes dot-keyframes {
   0% {
     opacity: 0.4;

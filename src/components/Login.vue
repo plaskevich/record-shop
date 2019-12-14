@@ -30,10 +30,10 @@
           </small> 
           <button type="submit" :disabled="isLoading" style="display: block; margin: 20px auto" class="btn btn-dark">
             <span :style="this.dots">SIGN IN</span>
-            <div class="loading-dots" v-if="this.isLoading">
-              <div class="loading-dots--dot"></div>
-              <div class="loading-dots--dot"></div>
-              <div class="loading-dots--dot"></div>
+            <div class="bloading-dots" v-if="this.isLoading">
+              <div class="bloading-dots--dot"></div>
+              <div class="bloading-dots--dot"></div>
+              <div class="bloading-dots--dot"></div>
             </div>
           </button>
         </b-form-group>
@@ -96,7 +96,7 @@ import { required } from 'vuelidate/lib/validators';
   }
 </script>
 
-<style lang="scss">
+<style lang="scss" scopedSlots>
   @keyframes dot-keyframes {
   0% {
     opacity: 0.4;
@@ -114,7 +114,7 @@ import { required } from 'vuelidate/lib/validators';
   }
 }
 
-.loading-dots {
+.bloading-dots {
   text-align: center;
   width: 100%;
 
@@ -123,16 +123,23 @@ import { required } from 'vuelidate/lib/validators';
     background-color: #fff;
     border-radius: 10px;
     display: inline-block;
-    height: 5px;
-    width: 5px;
-    margin: 0 7.3px 3px 7.3px;
+    height: 6px;
+    width: 6px;
+    margin-bottom: 2px;
+
+    &:nth-child(1) {
+      margin-right: 2px;
+      margin-left: 18px;
+    }
 
     &:nth-child(2) {
       animation-delay: 0.5s;
+      margin-right: 2px ;
     }
 
     &:nth-child(3) {
       animation-delay: 1s;
+      margin-right: 18px;
     }
   }
 }
