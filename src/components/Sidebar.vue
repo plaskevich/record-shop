@@ -35,11 +35,11 @@ export default {
           title: 'Sold',
           icon: 'fas fa-wallet'
         },
-        // {
-        //   href: '/settings',
-        //   title: 'Settings',
-        //   icon: 'fas fa-cogs'
-        // },
+        {
+          href: '/settings',
+          title: 'Settings',
+          icon: 'fas fa-cogs'
+        },
         {
           title: 'Logout',
           icon: 'fas fa-sign-out-alt'
