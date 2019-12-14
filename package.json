@@ -15,11 +15,14 @@
     "core-js": "^2.6.5",
     "firebase": "^6.3.3",
     "moment": "^2.24.0",
+    "node-sass": "^4.13.0",
+    "sass-loader": "^8.0.0",
     "vue": "^2.6.10",
     "vue-router": "^3.0.7",
     "vue-sidebar-menu": "^4.4.3",
     "vue-star-rating": "^1.6.1",
-    "vuefire": "^2.1.0"
+    "vuefire": "^2.1.0",
+    "vuelidate": "^0.7.4"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.9.0",

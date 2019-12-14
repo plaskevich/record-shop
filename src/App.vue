@@ -12,10 +12,11 @@ export default {
 }
 </script>
 
-<style>
+<style lang="css">
   body {
     font-family: 'Open Sans', sans-serif;
     font-size: 15px;
-    background-color: #F0F0F0
+    background-color: #f0f0f0
   };
+  
 </style>

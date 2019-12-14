@@ -2,75 +2,85 @@
   <div id="form-release">
     <Sidebar />
     <div style="width: 85%; float:right">
-      <form @submit.prevent="submit"
-            class=" col-md-7 rounded"
-            style="padding: 20px 40px; margin-bottom: 20px;">
-        <div class="form-group row">
-          <button type="button" class="btn btn-link" v-b-modal.discogsModal>Add from Disogs</button>
-        </div>
-        <div class="form-group row">
-          <label class="col-sm-3 col-form-label">Title</label>
-          <div class="col-sm-9">
-            <input type="text" class="form-control" required v-model="title">
+      <b-card class="m-4 col-lg-10 pl-5">
+        <form @submit.prevent="submit"
+              class=" col-md-10 rounded"
+              style="padding: 20px 40px; margin-bottom: 20px;">
+          <div class="form-group row">
+            <button type="button" class="btn btn-link" v-b-modal.discogsModal>Import data from Disogs</button>
           </div>
-        </div>
-        <div class="form-group row">
-          <label class="col-sm-3 col-form-label">Artist</label>
-          <div class="col-sm-9">
-            <input type="text" class="form-control" required v-model="artist">
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Title</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" required v-model="title">
+            </div>
           </div>
-        </div>
-        <div class="form-group row">
-          <label class="col-sm-3 col-form-label">Label</label>
-          <div class="col-sm-9">
-            <input type="text" class="form-control" required v-model="label">
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Artist</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" required v-model="artist">
+            </div>
           </div>
-        </div>
-        <div class="form-group row">
-          <label class="col-sm-3 col-form-label">Genre</label>
-          <div class="col-sm-9">
-            <input type="text" class="form-control" v-model="genre">
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Label</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" required v-model="label">
+            </div>
           </div>
-        </div>
-        <div class="form-group row">
-          <label class="col-sm-3 col-form-label">Year</label>
-          <div class="col-sm-9">
-            <input type="number" class="form-control" v-model="year">
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Genre</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" v-model="genre">
+            </div>
           </div>
-        </div>
-        <div class="form-group row">
-          <label class="col-sm-3 col-form-label">Condition</label>
-          <div class="col-sm-9">
-            <!-- <star-rating :star-size=25 rounded-corners v-model="condition"></star-rating> -->
-              <select class="form-control col-sm-12" v-model="condition">
-                <option disabled selected value> -- Select Condition -- </option>
-                <option value="M">Mint</option>
-                <option value="NM">Near Mint</option>
-                <option value="VG+">Very Good Plus</option>
-                <option value="VG">Very Good</option>
-                <option value="G">Good</option>
-                <option value="P">Poor</option>
-              </select>
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Year</label>
+            <div class="col-sm-9">
+              <input type="number" class="form-control" v-model="year">
+            </div>
           </div>
-        </div>
-        <div class="form-group row">
-          <label class="col-sm-3 col-form-label">Price</label>
-          <div class="col-sm-9">
-            <input type="number" class="form-control" v-model="price">
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Condition</label>
+            <div class="col-sm-9">
+                <select class="form-control col-sm-12" v-model="condition">
+                  <option disabled selected value> -- Select Condition -- </option>
+                  <option value="M">Mint</option>
+                  <option value="NM">Near Mint</option>
+                  <option value="VG+">Very Good Plus</option>
+                  <option value="VG">Very Good</option>
+                  <option value="G">Good</option>
+                  <option value="P">Poor</option>
+                </select>
+            </div>
           </div>
-        </div>
-        <div class="form-group row">
-          <label class="col-sm-3 col-form-label">Notes</label>
-          <div class="col-sm-9">
-            <textarea maxlength="250" style="resize: none;" rows="4" class="form-control" v-model="notes">
-            </textarea>
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Price</label>
+            <div class="col-sm-9">
+              <input type="number" class="form-control" v-model="price">
+            </div>
           </div>
-        </div>
-        <div class="text-right">
-          <button type="submit" class="btn btn-primary" style="margin-right: 10px">Submit</button>
-        <router-link to="/"> <button class="btn btn-danger">Cancel</button></router-link>
-        </div>
-      </form>
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Status</label>
+            <div class="col-sm-9">
+                <select class="form-control col-sm-12" v-model="status">
+                  <option value="in-stock" selected>In Stock</option>
+                  <option value="sold">Sold</option>
+                </select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Notes</label>
+            <div class="col-sm-9">
+              <textarea maxlength="250" style="resize: none;" rows="4" class="form-control" v-model="notes">
+              </textarea>
+            </div>
+          </div>
+          <div class="text-right">
+            <button type="submit" class="btn btn-dark" style="margin-right: 10px">Save</button>
+          <router-link to="/"> <button class="btn btn-light">Cancel</button></router-link>
+          </div>
+        </form>
+        </b-card>
       <b-modal id="discogsModal" hide-header @ok="addFromDiscogs(discogsId)">
           <div class="d-block text-center">
             <h5>Enter the release ID:</h5>
@@ -85,7 +95,6 @@
 <script>
   import db from '../firebase/firebase'
   import axios from 'axios'
-  import firebase from 'firebase';
   import Sidebar from './Sidebar'
 
   export default {
@@ -108,7 +117,7 @@
         condition: null,
         price: null,
         notes: null,
-        status: null,
+        status: 'in-stock',
         discogsId: null,
       }
     },
@@ -126,6 +135,7 @@
           this.condition = doc.data().condition
           this.price = doc.data().price
           this.notes = doc.data().notes
+          this.status = doc.data().status
         })
       }
     },
@@ -147,6 +157,7 @@
           this.condition = doc.data().condition
           this.price = doc.data().price
           this.notes = doc.data().notes
+          this.status = doc.data().status
         })
       },
 
@@ -166,6 +177,7 @@
           price: this.price,
           date_added: new Date(),
           notes: this.notes,
+          status: this.status,
         })
         .then(() => {
           this.$router.go(-1)
@@ -184,6 +196,7 @@
             condition: this.condition,
             price: this.price,
             notes: this.notes,
+            status: this.status,
           })
           .then(() => {
             this.$router.go(-1)
