@@ -5,7 +5,7 @@
       <div class="navbar">
         <b-form-input style="border-radius: 20px" v-model="filter" class="col-sm-3" placeholder="Search..."></b-form-input>
         <router-link to="/new" class="nav-item" style="float:right ">
-          <button style="border-radius: 20px" class="btn btn-success">+ Add Release</button>
+          <button style="border-radius: 20px" class="btn btn-dark">+ Add Release</button>
         </router-link>
       </div>
       <div style="margin: 20px 0">
@@ -35,7 +35,7 @@
           <template v-slot:cell(date_added)="data">
             {{moment(data.item.date_added).format('DD/MM/YY')}}
           </template>
-          <template v-slot:cell(remove)="data">
+          <template v-slot:cell(options)="data">
             <b-dropdown variant="link" dropleft toggle-class="text-decoration-none" no-caret>
               <template v-slot:button-content>
                 <div style="cursor: pointer"><i class="fas fa-ellipsis-v text-dark"></i></div>
@@ -44,13 +44,13 @@
                 {{ data.item.status === 'sold' ? 'Mark In-Stock' : 'Mark Sold' }}
               </b-dropdown-item>
               <b-dropdown-item @click="editRelease(data.item.id)">Edit</b-dropdown-item>
-              <b-dropdown-item @click="deleteRelease(data.item.id)">Delete</b-dropdown-item>
+              <b-dropdown-item v-b-modal.deleteModal @click="selected = data.item.id">Delete</b-dropdown-item>
             </b-dropdown>
           </template>
         </b-table>
         </div>
       <div>
-        <b-modal id="deleteModal" hide-header @ok="deleteRelease(id)">
+        <b-modal id="deleteModal" ok-variant="dark" cancel-variant="light" hide-header @ok="deleteRelease">
           <div class="d-block text-center">
             <h5>Are you sure you want to delete the release?</h5>
           </div>
@@ -63,15 +63,13 @@
 <script>
   import db from '../firebase/firebase'
   import Sidebar from './Sidebar'
-  // import firebase from 'firebase/app';
-  // import 'firebase/auth';
 
   export default {
     components: { Sidebar },
     name: 'home',
     data () {
       return {
-        uid: null,
+        selected: null,
         sortBy: 'date_added',
         sortDesc: true,
         fields: [
@@ -83,8 +81,7 @@
           { key: 'condition', sortable: false },
           { key: 'date_added', label: 'Date', sortable: true },
           { key: 'price', sortable: true },
-          // { key: 'edit', label: '', sortable: false },
-          { key: 'remove', label: '', sortable: false },
+          { key: 'options', label: '', sortable: false },
         ],
         items: [],
         filter: null,
@@ -105,7 +102,7 @@
     methods: {
       rowClass(item) {
         if (!item) return
-        if (item.status === 'sold' && !this.$route.params.page) return 'table-danger'
+        if (item.status === 'sold' && !this.$route.params.page) return 'table-warning'
       },
 
       fetchData() {
@@ -168,9 +165,9 @@
         this.$router.push({ name: 'edit-release', params: {id}})
       },
 
-      deleteRelease(id) {
+      deleteRelease() {
        db.collection('shops').doc('libertine').collection('collection')
-       .doc(id).delete().then(() => {
+       .doc(this.selected).delete().then(() => {
           this.fetchData();
         })
       },

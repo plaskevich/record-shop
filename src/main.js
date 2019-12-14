@@ -6,7 +6,9 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 import moment from 'moment';
 import VueSidebarMenu from 'vue-sidebar-menu'
 import 'vue-sidebar-menu/dist/vue-sidebar-menu.css'
+import Vuelidate from 'vuelidate'
 
+Vue.use(Vuelidate)
 Vue.use(VueSidebarMenu)
 Vue.use(BootstrapVue)
 Vue.prototype.moment = moment

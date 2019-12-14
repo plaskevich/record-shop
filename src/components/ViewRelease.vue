@@ -2,59 +2,61 @@
   <div id="view-record">
     <Sidebar />
     <div style="width: 85%; float:right">
+      <b-card class="col-md-8" style="margin: 50px">
+        
       <form @submit.prevent="submit"
-            style="padding: 0 40px; font-size: 16px" class="col-sm-12">
+            style="padding: 10px 30px; font-size: 16px" class="col-md-12">
         <div class="form-group row">
-          <div class="col-sm-12 text-right">
-              <button class="btn btn-link">
-                <router-link v-bind:to="{ name: 'edit-release', params: { id }}">Edit</router-link>
-              </button>
-              <button class="btn btn-link text-danger" v-b-modal.deleteModal @click="id=data.item.id">Delete</button>
+          <b-dropdown class="p-1 mb-3" variant="link" dropright toggle-class="text-decoration-none" no-caret>
+              <template v-slot:button-content>
+                <div style="cursor: pointer"><i style="font-size: 20px" class="fas fa-ellipsis-h text-dark float-left"></i></div>
+              </template>
+              <b-dropdown-item @click="editRelease(id)">Edit</b-dropdown-item>
+              <b-dropdown-item v-b-modal.deleteModal>Delete</b-dropdown-item>
+            </b-dropdown>
+          <div class="col-md-12 row">
+            <h3 class="col-md-12"><b>{{ artist }}</b> - {{ title }}</h3>
           </div>
         </div>
         <div class="form-group row">
-          <div class="col-sm-12">
-            <h3><b>{{ artist }}</b> - {{ title }}</h3>
-          </div>
-        </div>
-        <div class="form-group row">
-          <label class="col-sm-2 col-form-label">Label: </label>
-          <div class="col-sm-9 form-control-plaintext">
+          <label class="col-md-3 col-form-label">Label: </label>
+          <div class="col-md-9 form-control-plaintext">
             {{ label }}
           </div>
         </div>
         <div class="form-group row">
-          <label class="col-sm-2 col-form-label">Genre: </label>
-          <div class="col-sm-9 form-control-plaintext">
+          <label class="col-md-3 col-form-label">Genre: </label>
+          <div class="col-md-9 form-control-plaintext">
             {{ genre }}
           </div>
         </div>
         <div class="form-group row">
-          <label class="col-sm-2 col-form-label">Year: </label>
-          <div class="col-sm-9 form-control-plaintext">
+          <label class="col-md-3 col-form-label">Year: </label>
+          <div class="col-md-9 form-control-plaintext">
             {{ year }}
           </div>
         </div>
         <div class="form-group row">
-          <label class="col-sm-2 col-form-label">Condition: </label>
-          <div class="col-sm-9 form-control-plaintext">
+          <label class="col-md-3 col-form-label">Condition: </label>
+          <div class="col-md-9 form-control-plaintext">
             {{ condition }}
           </div>
         </div>
         <div class="form-group row">
-          <label class="col-sm-2 col-form-label">Price: </label>
-          <div class="col-sm-9 form-control-plaintext">
+          <label class="col-md-3 col-form-label">Price: </label>
+          <div class="col-md-9 form-control-plaintext">
             {{ price ? price + ' €' : '-'}}
           </div>
         </div>
         <div class="form-group row">
-          <label class="col-sm-2 col-form-label">Notes: </label>
-          <div class="col-sm-9 form-control-plaintext">
+          <label class="col-md-3 col-form-label">Notes: </label>
+          <div class="col-md-9 form-control-plaintext">
             <i style="font-weight: 300">{{ notes }}</i>
           </div>
         </div>
       </form>
-      <b-modal id="deleteModal" hide-header @ok="deleteRelease(id)">
+      </b-card>
+      <b-modal id="deleteModal" ok-variant="dark" cancel-variant="light" hide-header @ok="deleteRelease">
           <div class="d-block text-center">
             <h5>Are you sure you want to delete the release?</h5>
           </div>
@@ -103,10 +105,14 @@ export default {
         })
       },
 
-      deleteRelease(id) {
+      editRelease(id) {
+        this.$router.push({ name: 'edit-release', params: {id}})
+      },
+
+      deleteRelease() {
         db.collection('shops').doc('libertine').collection('collection')
-        .doc(id).delete().then(() => {
-          this.$router.push({ name: 'home' })
+        .doc(this.id).delete().then(() => {
+          this.$router.push({ name: 'collecion' })
         })
       },
     }
@@ -117,5 +123,8 @@ export default {
   .col-form-label{
     font-weight: 800
   }
+  .dropdown-item.active, .dropdown-item:active {
+    background-color: #b1b1b1;
+}
   
 </style>

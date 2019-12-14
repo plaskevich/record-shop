@@ -54,15 +54,10 @@ export default {
         firebase.auth().signOut().then(function() {
           this.$router.push('login')
         }).catch(function(error) {
-          console.log(error)
+          return error
         });
       }
     }
   }
 }
 </script>
-<style>
-  .v-sidebar-menu .vsm--icon {
-    background: none!important
-  }
-</style>
