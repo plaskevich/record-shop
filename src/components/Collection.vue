@@ -10,6 +10,8 @@
       </div>
       <div>
         <b-table
+          style="cursor: pointer"
+          @row-clicked="rowClick"
           :tbody-tr-class="rowClass"
           :items="items"
           :fields="fields"
@@ -19,15 +21,10 @@
           sticky-header
           borderless
           striped
+          hover
           head-variant="dark">
           <template v-slot:cell(img)="data">
-            <img style="max-width: 30px" :src="data.item.img_uri || 'https://upload.wikimedia.org/wikipedia/commons/1/11/Vinyl_record_orange.png'"  alt="artwork">
-          </template>
-          <template v-slot:cell(title)="data">
-            <router-link style="color: inherit"
-                        v-bind:to="{ name: 'view-release', params: { id: data.item.id }},">
-                        {{ data.item.title }}
-            </router-link>
+            <img style="max-width: 40px" :src="data.item.img_uri || 'https://upload.wikimedia.org/wikipedia/commons/1/11/Vinyl_record_orange.png'"  alt="artwork">
           </template>
           <template v-slot:cell(price)="data">
             {{ data.item.price ? data.item.price + ' €' : '-'}}
@@ -106,6 +103,10 @@
         if (item.status === 'sold' && !this.$route.params.page) return 'table-warning'
       },
 
+      rowClick(row) {
+        this.$router.push({ name: 'view-release', params:{ id: row.id } })
+      },
+
       fetchData() {
         this.items = [];
         if (this.$route.params.page === 'sold' || this.$route.params.page === 'in-stock') {
@@ -177,7 +178,3 @@
     }
   }
 </script>
-
-<style lang="css">
-  
-</style>

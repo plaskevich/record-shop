@@ -83,7 +83,7 @@
           </div>
           <div class="text-right">
             <button type="submit" class="btn btn-dark" style="margin-right: 10px">Save</button>
-          <router-link to="/"> <button class="btn btn-light">Cancel</button></router-link>
+          <a href="javascript:history.go(-1)" class="btn btn-light">Cancel</a>
           </div>
         </form>
         </b-card>
@@ -221,7 +221,6 @@
         const myKey = 'RQjHhwSaMHxwGbPxJxXz';
         const mySecret = 'BIdsSStHDrPRlaWqpKiEeKTEkaHmSrwY';
         axios.get(`https://api.discogs.com/releases/${id}?key=${myKey}&secret=${mySecret}`).then((response) => {
-          console.log(response);
           const data = response.data;
           let artists = [];
           let labels = [];
