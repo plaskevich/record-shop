@@ -54,6 +54,15 @@
                     {{ price ? price + ' €' : '-'}}
                   </div>
                 </div>
+                <div v-if="status" class="form-group row">
+                  <label class="col-lg-4 col-form-label">Status: </label>
+                  <div v-if="status==='sold'" class="text-warning col form-control-plaintext">
+                    Sold
+                  </div>
+                  <div v-if="status==='in-stock'" class="text-success col form-control-plaintext">
+                    Available
+                  </div>
+                </div>
                 <div v-if="notes" class="form-group row">
                   <label class="col-lg-4 col-form-label">Notes: </label>
                   <div class="col form-control-plaintext">
@@ -98,6 +107,7 @@ export default {
       price: null,
       notes: null,
       img_uri: null,
+      status: null,
     }
   },
 
@@ -115,6 +125,7 @@ export default {
           this.price = doc.data().price
           this.notes = doc.data().notes
           this.img_uri = doc.data().img_uri
+          this.status = doc.data().status
         })
     },
 

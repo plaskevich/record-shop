@@ -2,46 +2,45 @@
   <div id="form-release">
     <Sidebar />
     <div style="width: 85%; float:right">
-      <b-card class="m-4 col-lg-9 pl-5 pr-0">
+      <b-card class="m-5 col-lg-8 pl-5 pr-5">
         <form @submit.prevent="submit"
-              class=" col-md-12 rounded"
-              style="padding: 20px 40px; margin-bottom: 20px;">
-          <div class="form-group row">
+              class=" col-md-12 pt-2 pb-2">
+          <div class="form-group row mb-4">
             <button type="button" class="btn btn-link" v-b-modal.discogsModal>Import data from Disogs</button>
           </div>
           <div class="form-group row">
-            <label class="col-sm-2 col-form-label">Title</label>
-            <div class="col-sm-8">
+            <label class="col-sm-3 col-form-label">Title</label>
+            <div class="col-sm-9">
               <input type="text" class="form-control" required v-model="title">
             </div>
           </div>
           <div class="form-group row">
-            <label class="col-sm-2 col-form-label">Artist</label>
-            <div class="col-sm-8">
+            <label class="col-sm-3 col-form-label">Artist</label>
+            <div class="col-sm-9">
               <input type="text" class="form-control" required v-model="artist">
             </div>
           </div>
           <div class="form-group row">
-            <label class="col-sm-2 col-form-label">Label</label>
-            <div class="col-sm-8">
+            <label class="col-sm-3 col-form-label">Label</label>
+            <div class="col-sm-9">
               <input type="text" class="form-control" v-model="label">
             </div>
           </div>
           <div class="form-group row">
-            <label class="col-sm-2 col-form-label">Genre</label>
-            <div class="col-sm-8">
+            <label class="col-sm-3 col-form-label">Genre</label>
+            <div class="col-sm-9">
               <input type="text" class="form-control" v-model="genre">
             </div>
           </div>
           <div class="form-group row">
-            <label class="col-sm-2 col-form-label">Year</label>
-            <div class="col-sm-8">
+            <label class="col-sm-3 col-form-label">Year</label>
+            <div class="col-sm-9">
               <input type="number" class="form-control" v-model="year">
             </div>
           </div>
           <div class="form-group row">
-            <label class="col-sm-2 col-form-label">Condition</label>
-            <div class="col-sm-8">
+            <label class="col-sm-3 col-form-label">Condition</label>
+            <div class="col-sm-9">
                 <select class="form-control col-sm-12" v-model="condition">
                   <option disabled selected value> -- Select Condition -- </option>
                   <option value="M">Mint</option>
@@ -54,14 +53,14 @@
             </div>
           </div>
           <div class="form-group row">
-            <label class="col-sm-2 col-form-label">Price</label>
-            <div class="col-sm-8">
+            <label class="col-sm-3 col-form-label">Price</label>
+            <div class="col-sm-9">
               <input type="number" class="form-control" v-model="price">
             </div>
           </div>
           <div class="form-group row">
-            <label class="col-sm-2 col-form-label">Status</label>
-            <div class="col-sm-8">
+            <label class="col-sm-3 col-form-label">Status</label>
+            <div class="col-sm-9">
                 <select class="form-control col-sm-12" v-model="status">
                   <option value="in-stock" selected>In Stock</option>
                   <option value="sold">Sold</option>
@@ -69,19 +68,19 @@
             </div>
           </div>
           <div class="form-group row">
-            <label class="col-sm-2 col-form-label">Image URL</label>
-            <div class="col-sm-8">
+            <label class="col-sm-3 col-form-label">Image URL</label>
+            <div class="col-sm-9">
               <input type="text" class="form-control" v-model="img_uri">
             </div>
           </div>
           <div class="form-group row">
-            <label class="col-sm-2 col-form-label">Notes</label>
-            <div class="col-sm-8">
+            <label class="col-sm-3 col-form-label">Notes</label>
+            <div class="col-sm-9">
               <textarea maxlength="250" style="resize: none;" rows="2" class="form-control" v-model="notes">
               </textarea>
             </div>
           </div>
-          <div class="text-right">
+          <div class="text-right mt-4">
             <button type="submit" class="btn btn-dark" style="margin-right: 10px">Save</button>
           <a href="javascript:history.go(-1)" class="btn btn-light">Cancel</a>
           </div>

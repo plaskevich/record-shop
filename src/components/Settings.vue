@@ -9,7 +9,7 @@
         <form @submit.prevent="submit"
               class=" col-md-12 rounded"
               style="padding: 20px 40px; margin-bottom: 20px;">
-          <h4 class="text-center mb-5">Change password</h4>
+          <h4 class=" mb-5">Change password</h4>
           <!-- <div class="form-group row">
             <label class="col-sm-5 col-form-label">Current password</label>
             <div class="col-sm-7">
@@ -34,7 +34,7 @@
           </small>
           </div>
           
-          <div class="mt-5 text-center">
+          <div class="mt-5 text-right">
             <button type="submit" class="btn btn-dark" style="margin-right: 10px">
               <span :style="this.dots">Save</span>
               <div class="loading-dots" v-if="this.isLoading">
@@ -43,7 +43,6 @@
                 <div class="loading-dots--dot"></div>
               </div>
             </button>
-
           <router-link to="/"> <button class="btn btn-light">Cancel</button></router-link>
           </div>
         </form>
