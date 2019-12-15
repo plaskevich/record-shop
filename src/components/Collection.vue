@@ -2,7 +2,7 @@
   <div id="home" style="padding: 10px">
     <Sidebar />
     <div style="width: 85%; float:right">
-      <div class="navbar">
+      <div class="navbar mb-2">
         <b-form-input style="border-radius: 20px" v-model="filter" class="col-sm-3" placeholder="Search..."></b-form-input>
         <router-link to="/new" class="nav-item" style="float:right ">
           <button style="border-radius: 20px" class="btn btn-dark">+ Add Release</button>
@@ -20,6 +20,9 @@
           borderless
           striped
           head-variant="dark">
+          <template v-slot:cell(img)="data">
+            <img style="max-width: 30px" :src="data.item.img_uri || 'https://upload.wikimedia.org/wikipedia/commons/1/11/Vinyl_record_orange.png'"  alt="artwork">
+          </template>
           <template v-slot:cell(title)="data">
             <router-link style="color: inherit"
                         v-bind:to="{ name: 'view-release', params: { id: data.item.id }},">
@@ -70,6 +73,7 @@
         sortBy: 'date_added',
         sortDesc: true,
         fields: [
+          { key: 'img', label: '', sortable: false },
           { key: 'title', sortable: true },
           { key: 'artist', sortable: true },
           { key: 'label', sortable: true },
@@ -121,6 +125,7 @@
                 'price': doc.data().price,
                 'date_added': new Date(doc.data().date_added.seconds * 1000) || '',
                 'status': doc.data().status,
+                'img_uri': doc.data().img_uri,
               }
               this.items.push(data)
             })
@@ -141,6 +146,7 @@
                 'price': doc.data().price,
                 'date_added': new Date(doc.data().date_added.seconds * 1000),
                 'status': doc.data().status,
+                'img_uri': doc.data().img_uri,
               }
               this.items.push(data)
             })

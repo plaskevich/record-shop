@@ -2,46 +2,46 @@
   <div id="form-release">
     <Sidebar />
     <div style="width: 85%; float:right">
-      <b-card class="m-4 col-lg-10 pl-5">
+      <b-card class="m-4 col-lg-9 pl-5 pr-0">
         <form @submit.prevent="submit"
-              class=" col-md-10 rounded"
+              class=" col-md-12 rounded"
               style="padding: 20px 40px; margin-bottom: 20px;">
           <div class="form-group row">
             <button type="button" class="btn btn-link" v-b-modal.discogsModal>Import data from Disogs</button>
           </div>
           <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Title</label>
-            <div class="col-sm-9">
+            <label class="col-sm-2 col-form-label">Title</label>
+            <div class="col-sm-8">
               <input type="text" class="form-control" required v-model="title">
             </div>
           </div>
           <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Artist</label>
-            <div class="col-sm-9">
+            <label class="col-sm-2 col-form-label">Artist</label>
+            <div class="col-sm-8">
               <input type="text" class="form-control" required v-model="artist">
             </div>
           </div>
           <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Label</label>
-            <div class="col-sm-9">
-              <input type="text" class="form-control" required v-model="label">
+            <label class="col-sm-2 col-form-label">Label</label>
+            <div class="col-sm-8">
+              <input type="text" class="form-control" v-model="label">
             </div>
           </div>
           <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Genre</label>
-            <div class="col-sm-9">
+            <label class="col-sm-2 col-form-label">Genre</label>
+            <div class="col-sm-8">
               <input type="text" class="form-control" v-model="genre">
             </div>
           </div>
           <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Year</label>
-            <div class="col-sm-9">
+            <label class="col-sm-2 col-form-label">Year</label>
+            <div class="col-sm-8">
               <input type="number" class="form-control" v-model="year">
             </div>
           </div>
           <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Condition</label>
-            <div class="col-sm-9">
+            <label class="col-sm-2 col-form-label">Condition</label>
+            <div class="col-sm-8">
                 <select class="form-control col-sm-12" v-model="condition">
                   <option disabled selected value> -- Select Condition -- </option>
                   <option value="M">Mint</option>
@@ -54,14 +54,14 @@
             </div>
           </div>
           <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Price</label>
-            <div class="col-sm-9">
+            <label class="col-sm-2 col-form-label">Price</label>
+            <div class="col-sm-8">
               <input type="number" class="form-control" v-model="price">
             </div>
           </div>
           <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Status</label>
-            <div class="col-sm-9">
+            <label class="col-sm-2 col-form-label">Status</label>
+            <div class="col-sm-8">
                 <select class="form-control col-sm-12" v-model="status">
                   <option value="in-stock" selected>In Stock</option>
                   <option value="sold">Sold</option>
@@ -69,9 +69,15 @@
             </div>
           </div>
           <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Notes</label>
-            <div class="col-sm-9">
-              <textarea maxlength="250" style="resize: none;" rows="4" class="form-control" v-model="notes">
+            <label class="col-sm-2 col-form-label">Image URL</label>
+            <div class="col-sm-8">
+              <input type="text" class="form-control" v-model="img_uri">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Notes</label>
+            <div class="col-sm-8">
+              <textarea maxlength="250" style="resize: none;" rows="2" class="form-control" v-model="notes">
               </textarea>
             </div>
           </div>
@@ -119,6 +125,7 @@
         price: null,
         notes: null,
         status: 'in-stock',
+        img_uri: null,
         discogsId: null,
       }
     },
@@ -137,6 +144,7 @@
           this.price = doc.data().price
           this.notes = doc.data().notes
           this.status = doc.data().status
+          this.img_uri = doc.data().img_uri
         })
       }
     },
@@ -159,6 +167,7 @@
           this.price = doc.data().price
           this.notes = doc.data().notes
           this.status = doc.data().status
+          this.img_uri = doc.data().img_uri
         })
       },
 
@@ -179,6 +188,7 @@
           date_added: new Date(),
           notes: this.notes,
           status: this.status,
+          img_uri: this.img_uri,
         })
         .then(() => {
           this.$router.go(-1)
@@ -198,6 +208,7 @@
             price: this.price,
             notes: this.notes,
             status: this.status,
+            img_uri: this.img_uri
           })
           .then(() => {
             this.$router.go(-1)
@@ -207,7 +218,10 @@
 
       addFromDiscogs(id) {
         this.discogsId = null;
-        axios.get(`https://api.discogs.com/releases/${id}`).then((response) => {
+        const myKey = 'RQjHhwSaMHxwGbPxJxXz';
+        const mySecret = 'BIdsSStHDrPRlaWqpKiEeKTEkaHmSrwY';
+        axios.get(`https://api.discogs.com/releases/${id}?key=${myKey}&secret=${mySecret}`).then((response) => {
+          console.log(response);
           const data = response.data;
           let artists = [];
           let labels = [];
@@ -218,6 +232,7 @@
           this.label = labels.join(', ');
           this.genre = data.genres.join(', ');
           this.year = data.year;
+          this.img_uri = data.images[0].uri
         })
         .catch(() => alert("Such release doesn't exist"))
       },
