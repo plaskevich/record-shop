@@ -7,6 +7,7 @@ import moment from 'moment';
 import VueSidebarMenu from 'vue-sidebar-menu'
 import 'vue-sidebar-menu/dist/vue-sidebar-menu.css'
 import Vuelidate from 'vuelidate'
+import './assets/style.css'
 
 Vue.use(Vuelidate)
 Vue.use(VueSidebarMenu)

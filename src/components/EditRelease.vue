@@ -2,11 +2,10 @@
   <div id="form-release">
     <Sidebar />
     <div style="width: 85%; float:right">
-      <b-card class="m-4 col-lg-10 pl-5">
+      <b-card class="m-5 col-lg-8 pl-5 pr-5">
         <form @submit.prevent="submit"
-              class=" col-md-10 rounded"
-              style="padding: 20px 40px; margin-bottom: 20px;">
-          <div class="form-group row">
+              class=" col-md-12 pt-2 pb-2">
+          <div class="form-group row mb-4">
             <button type="button" class="btn btn-link" v-b-modal.discogsModal>Import data from Disogs</button>
           </div>
           <div class="form-group row">
@@ -24,7 +23,7 @@
           <div class="form-group row">
             <label class="col-sm-3 col-form-label">Label</label>
             <div class="col-sm-9">
-              <input type="text" class="form-control" required v-model="label">
+              <input type="text" class="form-control" v-model="label">
             </div>
           </div>
           <div class="form-group row">
@@ -69,22 +68,29 @@
             </div>
           </div>
           <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Image URL</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" v-model="img_uri">
+            </div>
+          </div>
+          <div class="form-group row">
             <label class="col-sm-3 col-form-label">Notes</label>
             <div class="col-sm-9">
-              <textarea maxlength="250" style="resize: none;" rows="4" class="form-control" v-model="notes">
+              <textarea maxlength="250" style="resize: none;" rows="2" class="form-control" v-model="notes">
               </textarea>
             </div>
           </div>
-          <div class="text-right">
+          <div class="text-right mt-4">
             <button type="submit" class="btn btn-dark" style="margin-right: 10px">Save</button>
-          <router-link to="/"> <button class="btn btn-light">Cancel</button></router-link>
+          <a href="javascript:history.go(-1)" class="btn btn-light">Cancel</a>
           </div>
         </form>
         </b-card>
       <b-modal id="discogsModal" hide-header @ok="addFromDiscogs(discogsId)">
           <div class="d-block text-center">
             <h5>Enter the release ID:</h5>
-            <b-form-input autofocus class="offset-sm-3 col-sm-6" v-model="discogsId" style="border: 1px solid #343a40">
+            <small><i class="text-muted">e.g. /Pink-Floyd-The-Dark-Side-Of-The-Moon/release/<span style="font-size: 13px" class="text-danger font-weight-bold">367104</span></i></small>
+            <b-form-input autofocus class="mt-3 offset-sm-3 col-sm-6" v-model="discogsId" style="border: 1px solid #343a40">
             </b-form-input>
           </div>
         </b-modal>
@@ -118,6 +124,7 @@
         price: null,
         notes: null,
         status: 'in-stock',
+        img_uri: null,
         discogsId: null,
       }
     },
@@ -136,6 +143,7 @@
           this.price = doc.data().price
           this.notes = doc.data().notes
           this.status = doc.data().status
+          this.img_uri = doc.data().img_uri
         })
       }
     },
@@ -158,6 +166,7 @@
           this.price = doc.data().price
           this.notes = doc.data().notes
           this.status = doc.data().status
+          this.img_uri = doc.data().img_uri
         })
       },
 
@@ -178,6 +187,7 @@
           date_added: new Date(),
           notes: this.notes,
           status: this.status,
+          img_uri: this.img_uri,
         })
         .then(() => {
           this.$router.go(-1)
@@ -197,6 +207,7 @@
             price: this.price,
             notes: this.notes,
             status: this.status,
+            img_uri: this.img_uri
           })
           .then(() => {
             this.$router.go(-1)
@@ -206,7 +217,9 @@
 
       addFromDiscogs(id) {
         this.discogsId = null;
-        axios.get(`https://api.discogs.com/releases/${id}`).then((response) => {
+        const myKey = 'RQjHhwSaMHxwGbPxJxXz';
+        const mySecret = 'BIdsSStHDrPRlaWqpKiEeKTEkaHmSrwY';
+        axios.get(`https://api.discogs.com/releases/${id}?key=${myKey}&secret=${mySecret}`).then((response) => {
           const data = response.data;
           let artists = [];
           let labels = [];
@@ -217,6 +230,7 @@
           this.label = labels.join(', ');
           this.genre = data.genres.join(', ');
           this.year = data.year;
+          this.img_uri = data.images[0].uri
         })
         .catch(() => alert("Such release doesn't exist"))
       },

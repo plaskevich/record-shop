@@ -1,0 +1,31 @@
+.v-sidebar-menu .vsm--icon {
+  background: none!important
+}
+
+.col-form-label {
+  line-height: 1.2rem;
+}
+
+.form-control {
+  height: 2rem;
+}
+
+.b-table-sticky-header {
+  /* max-height: 100%!important; */
+  overflow-y: inherit!important;
+}
+
+.table td, .table th {
+  vertical-align: middle!important;
+}
+
+.dropdown-item.active, .dropdown-item:active {
+  background-color: rgb(99, 99, 99)!important;
+}
+
+.thead-dark th {
+  background-color: #2a2a2e!important
+}
+.btn-dark {
+  background-color: #2a2a2e!important
+}
