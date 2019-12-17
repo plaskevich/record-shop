@@ -17,7 +17,7 @@
             <router-link to="/collection"><i class="fas fa-angle-left"></i> Back</router-link>
           </div>
           <div class="row">
-            <img v-if="img_uri" style="max-width: 250px; max-height:250px" class="ml-4 mr-3 mb-4" :src="img_uri" alt="">
+            <img v-if="img_uri" style="max-with:250px; max-height: 250px" class="img img-responsive ml-4 mr-3 mb-4" :src="img_uri" alt="">
             <div class="col">
               <div class="col-lg-12">
                 <div class="mb-5">
