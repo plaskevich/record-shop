@@ -35,7 +35,7 @@
       </template>
         <template v-slot:cell(img)="data">
           <div class="checkbox-img">
-            <img :style="selectToggle ? ' filter: blur(1px)' : ''" style="max-width: 40px" :src="isLink(data.item.img_uri) ? data.item.img_uri : 'https://upload.wikimedia.org/wikipedia/commons/1/11/Vinyl_record_orange.png'" alt="artwork">
+            <img :style="selectToggle ? ' filter: blur(1px) brightness(60%)' : ''" style="max-width: 40px" :src="isLink(data.item.img_uri) ? data.item.img_uri : 'https://upload.wikimedia.org/wikipedia/commons/1/11/Vinyl_record_orange.png'" alt="artwork">
              <b-form-checkbox v-model="selectedRows" :value="data.item.id" size="lg"
                                class="checkbox" v-if="selectToggle">
           </b-form-checkbox>
