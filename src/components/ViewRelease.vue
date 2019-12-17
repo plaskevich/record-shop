@@ -1,9 +1,8 @@
 <template>
   <div>
-    <Sidebar />
     <div style="width: 85%; float:right">
-      <b-card class="col-lg-8 pt-2 pb-5 m-5">
-        <form @submit.prevent="submit" style="padding: 0 30px; font-size: 16px" class="mt-4 col-lg-12">
+      <b-card class="col-lg-9 offset-lg-1 mt-5">
+        <form @submit.prevent="submit" style="padding: 0 20px; font-size: 16px" class="mt-2 col-lg-12">
           <div class="row float-right">
             <b-dropdown class="row" dropleft variant="link" toggle-class="text-decoration-none" no-caret>
               <template v-slot:button-content>
@@ -85,12 +84,8 @@
 
 <script>
 import db from '../firebase/firebase'
-import Sidebar from './Sidebar'
 
 export default {
-  components: {
-    Sidebar
-  },
   created() {
     this.fetchData();
   },

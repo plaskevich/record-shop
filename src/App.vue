@@ -1,14 +1,18 @@
 <template>
   <div id="app">
-      <router-view/>
+    <Sidebar v-if="$route.path != '/login'" />
+      <transition name="fade" mode="out-in">
+        <router-view/>
+      </transition>
   </div>
 </template>
 
 <script>
+import Sidebar from './components/Sidebar';
+
 export default {
   name: 'app',
-  components: {
-  }
+  components: { Sidebar },
 }
 </script>
 

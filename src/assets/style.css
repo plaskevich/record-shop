@@ -8,6 +8,10 @@
 
 .form-control {
   height: 2rem;
+  border: 0;
+  background-color: #f0f0f0;
+  border-radius: 0;
+  
 }
 
 .b-table-sticky-header {
@@ -28,4 +32,59 @@
 }
 .btn-dark {
   background-color: #2a2a2e!important
+}
+
+.card {
+  box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
+  border-radius: 0;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition-duration: 0.2s;
+  transition-property: opacity;
+  transition-timing-function: ease;
+}
+
+.fade-enter,
+.fade-leave-active {
+  opacity: 0
+}
+
+.searchbar {
+  background-color: #fff;
+  box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
+}
+.btn-dark{
+  border-radius: 0!important;
+}
+.btn-light{
+  border-radius: 0;
+  background-color: #f0f0f0;
+}
+
+.dropdown-menu {
+  border-radius: 0;
+  box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
+}
+
+svg path,
+svg rect{
+  fill: #fff;
+}
+
+.checkbox-img {
+  position:relative;
+  margin-right:20px;
+  margin-bottom:10px;
+  height:30px;
+}
+.checkbox {
+  position:absolute;
+  right:0px;
+  bottom:-6px;
+}
+
+.modal-content {
+  border-radius: 0;
 }

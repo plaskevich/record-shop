@@ -1,9 +1,8 @@
 <template>
 <div id="home" class="pt-2">
-  <Sidebar />
-  <div style="width: 85%; float:right">
+  <div style="width:85%; float:right">
     <b-navbar>
-      <b-form-input style="border-radius: 20px" v-model="filter" class="col-sm-3 mb-2" placeholder="Search..."></b-form-input>
+      <b-form-input v-model="filter" class="col-sm-3 searchbar mb-2" placeholder="Search..."></b-form-input>
       <button type="button" class="btn btn-link text-dark pt-0 ml-3" @click="selectToggle = !selectToggle">{{ selectToggle ? 'Hide Select' : 'Select Multiple' }}</button>
       <div class="ml-5" :class="!selectToggle ? 'invisible' : 'visible'">
         <button type="button" v-if="$route.params.page != 'sold'" class="pt-0 btn btn-link text-warning" @click="markRowsSold">Set Sold</button>
@@ -36,7 +35,7 @@
       </template>
         <template v-slot:cell(img)="data">
           <div class="checkbox-img">
-            <img :style="selectToggle ? ' filter: blur(2px)' : ''" style="max-width: 40px" :src="isLink(data.item.img_uri) ? data.item.img_uri : 'https://upload.wikimedia.org/wikipedia/commons/1/11/Vinyl_record_orange.png'" alt="artwork">
+            <img :style="selectToggle ? ' filter: blur(1px)' : ''" style="max-width: 40px" :src="isLink(data.item.img_uri) ? data.item.img_uri : 'https://upload.wikimedia.org/wikipedia/commons/1/11/Vinyl_record_orange.png'" alt="artwork">
              <b-form-checkbox v-model="selectedRows" :value="data.item.id" size="lg"
                                class="checkbox" v-if="selectToggle">
           </b-form-checkbox>
@@ -81,12 +80,8 @@
 
 <script>
 import db from '../firebase/firebase'
-import Sidebar from './Sidebar'
 
 export default {
-  components: {
-    Sidebar
-  },
 
   watch: {
     '$route.params.page': function () {
@@ -196,10 +191,6 @@ export default {
       }
 
     },
-
-    // selectAll() {
-    //   this.items.forEach(i => this.selectedRows.push(i.id))
-    // },
 
     fetchData() {
       if (this.$route.params.page === 'sold' || this.$route.params.page === 'in-stock') {
@@ -327,7 +318,5 @@ export default {
 </script>
 
 <style lang="css">
-  .checkbox-img {position:relative;  margin-right:20px; margin-bottom:10px; height:30px;}
-  .checkbox {position:absolute; right:0px; bottom:-6px;}
   
 </style>
