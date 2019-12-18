@@ -1,9 +1,8 @@
 <template>
   <div>
-    <Sidebar />
     <div style="width: 85%; float:right">
-      <b-card class="col-lg-8 pt-2 pb-5 m-5">
-        <form @submit.prevent="submit" style="padding: 0 30px; font-size: 16px" class="mt-4 col-lg-12">
+      <b-card class="col-lg-9 offset-lg-1 mt-5">
+        <form @submit.prevent="submit" style="padding: 0 20px; font-size: 16px" class="mt-2 col-lg-12">
           <div class="row float-right">
             <b-dropdown class="row" dropleft variant="link" toggle-class="text-decoration-none" no-caret>
               <template v-slot:button-content>
@@ -17,7 +16,7 @@
             <router-link to="/collection"><i class="fas fa-angle-left"></i> Back</router-link>
           </div>
           <div class="row">
-            <img v-if="img_uri" style="max-width: 250px; max-height:250px" class="ml-4 mr-3 mb-4" :src="img_uri" alt="">
+            <img v-if="img_uri" style="max-with:250px; max-height: 250px" class="img img-responsive ml-4 mr-3 mb-4" :src="img_uri" alt="">
             <div class="col">
               <div class="col-lg-12">
                 <div class="mb-5">
@@ -85,12 +84,8 @@
 
 <script>
 import db from '../firebase/firebase'
-import Sidebar from './Sidebar'
 
 export default {
-  components: {
-    Sidebar
-  },
   created() {
     this.fetchData();
   },

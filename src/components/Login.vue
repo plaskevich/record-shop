@@ -2,8 +2,9 @@
   <div style="padding-top: 40px">
     <h1 class="text-center" style="font-weight: 800">Record Shop</h1>
     <b-form @submit.prevent="login" class="mt-5">
-      <b-card bg-variant="light" class="offset-lg-4 col-lg-4">
-        <h3 class="text-center mt-4">LOGIN</h3>
+      <b-card bg-variant="light" class="offset-lg-4 offset-md-3 offset-sm-2 offset-xs-1 
+                                        col-lg-4 col-md-6 col-sm-8 col-xs-10">
+        <h3 class="text-center mt-4">Welcome!</h3>
         <b-form-group
           style="margin-top: 30px"
           label="Email"
@@ -27,14 +28,29 @@
           </small> 
           <small v-if="userPassError" class="text-danger">
             Wrong username or password
-          </small> 
-          <button type="submit" :disabled="isLoading" style="display: block; margin: 20px auto" class="btn btn-dark">
+          </small>
+          <button type="submit" :disabled="isLoading" style="display: block; margin: 20px auto; height: 44px" class="btn btn-dark col-sm-3">
             <span :style="this.dots">SIGN IN</span>
-            <div class="bloading-dots" v-if="this.isLoading">
-              <div class="bloading-dots--dot"></div>
-              <div class="bloading-dots--dot"></div>
-              <div class="bloading-dots--dot"></div>
-            </div>
+            <div v-if="this.isLoading" class="loader loader--style8">
+            <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+              width="24px" height="30px" viewBox="0 0 24 30" style="enable-background:new 0 0 50 50;" xml:space="preserve">
+              <rect x="0" y="10" width="4" height="10" fill="#333" opacity="0.2">
+                <animate attributeName="opacity" attributeType="XML" values="0.2; 1; .2" begin="0s" dur="0.6s" repeatCount="indefinite" />
+                <animate attributeName="height" attributeType="XML" values="10; 20; 10" begin="0s" dur="0.6s" repeatCount="indefinite" />
+                <animate attributeName="y" attributeType="XML" values="10; 5; 10" begin="0s" dur="0.6s" repeatCount="indefinite" />
+              </rect>
+              <rect x="8" y="10" width="4" height="10" fill="#333"  opacity="0.2">
+                <animate attributeName="opacity" attributeType="XML" values="0.2; 1; .2" begin="0.15s" dur="0.6s" repeatCount="indefinite" />
+                <animate attributeName="height" attributeType="XML" values="10; 20; 10" begin="0.15s" dur="0.6s" repeatCount="indefinite" />
+                <animate attributeName="y" attributeType="XML" values="10; 5; 10" begin="0.15s" dur="0.6s" repeatCount="indefinite" />
+              </rect>
+              <rect x="16" y="10" width="4" height="10" fill="#333"  opacity="0.2">
+                <animate attributeName="opacity" attributeType="XML" values="0.2; 1; .2" begin="0.3s" dur="0.6s" repeatCount="indefinite" />
+                <animate attributeName="height" attributeType="XML" values="10; 20; 10" begin="0.3s" dur="0.6s" repeatCount="indefinite" />
+                <animate attributeName="y" attributeType="XML" values="10; 5; 10" begin="0.3s" dur="0.6s" repeatCount="indefinite" />
+              </rect>
+            </svg>
+          </div>
           </button>
         </b-form-group>
     </b-card>

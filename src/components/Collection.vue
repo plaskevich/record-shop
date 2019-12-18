@@ -1,28 +1,46 @@
 <template>
 <div id="home" class="pt-2">
-  <Sidebar />
-  <div style="width: 85%; float:right">
-    <div class="navbar">
-      <b-form-input style="border-radius: 20px" v-model="filter" class="col-sm-3 mb-2" placeholder="Search..."></b-form-input>
-      <button type="button" class="btn btn-link text-dark" @click="selectClick">{{ selectToggle ? 'Hide' : 'Select' }}</button>
-      <div :class="!selectToggle ? 'invisible' : 'visible'">
-        <button type="button" v-if="$route.params.page != 'sold'" class="btn btn-link text-dark" @click="markRowsSold">Mark Sold</button>
-        <button type="button" v-if="$route.params.page != 'in-stock'" class="btn btn-link text-dark" @click="markRowsInStock">Mark In Stock</button>
-        <button type="button" class="btn btn-link text-dark" v-b-modal.deleteRowsModal>Delete</button>
+  <div style="width:85%; float:right">
+    <b-navbar>
+      <b-form-input v-model="filter" class="col-sm-3 searchbar mb-2" placeholder="Search..."></b-form-input>
+      <button type="button" class="btn btn-link text-dark pt-0 ml-3" @click="selectToggle = !selectToggle">{{ selectToggle ? 'Hide Select' : 'Select Multiple' }}</button>
+      <div class="ml-5" :class="!selectToggle ? 'invisible' : 'visible'">
+        <button type="button" v-if="$route.params.page != 'sold'" class="pt-0 btn btn-link text-warning" @click="markRowsSold">Set Sold</button>
+        <button type="button" v-if="$route.params.page != 'in-stock'" class="pt-0 btn btn-link text-success" @click="markRowsInStock">Set Available</button>
+        <button type="button" class="pt-0 btn btn-link text-danger" v-b-modal.deleteRowsModal>Delete</button>
       </div>
-      <router-link to="/new" class="nav-item">
+      <div class="col">
+      <router-link to="/new" class="nav-item float-right">
         <button style="border-radius: 20px" class="btn btn-dark">+ Add Release</button>
       </router-link>
-    </div>
+      </div>
+    </b-navbar>
     <div>
-
-      <b-table @row-clicked="rowClick" style="cursor: pointer; margin-bottom: 60px" :tbody-tr-class="rowClass" :items="items" :fields="fields" :sort-by.sync="sortBy" :sort-desc.sync="sortDesc" :filter="filter" sticky-header borderless striped hover head-variant="dark">
-        <template v-slot:cell(img)="data">
-          <img style="max-width: 40px" :src="isLink(data.item.img_uri) ? data.item.img_uri : 'https://upload.wikimedia.org/wikipedia/commons/1/11/Vinyl_record_orange.png'" alt="artwork">
-        </template>
-        <template v-slot:cell(check)="data">
-          <b-form-checkbox v-model="selectedRows" :value="data.item.id" style="width: 30px; height: 30px" class="pr-0" v-if="selectToggle">
+      <b-table
+        @row-clicked="rowClick"
+        no-sort-reset
+        style="cursor: pointer; margin-bottom: 60px"
+        :tbody-tr-class="rowClass"
+        :items="items"
+        :fields="fields"
+        :sort-by.sync="sortBy"
+        :sort-desc.sync="sortDesc"
+        :filter="filter"
+        sticky-header
+        borderless striped hover head-variant="dark">
+        <template v-slot:head(img)="data">
+        <b-form-checkbox v-model="selectAll" size="lg"
+                         style="margin-left: 10px" v-if="selectToggle">
           </b-form-checkbox>
+      </template>
+        <template v-slot:cell(img)="data">
+          <div class="checkbox-img">
+            <img :style="selectToggle ? ' filter: blur(1px) brightness(60%)' : ''" style="max-width: 40px" :src="isLink(data.item.img_uri) ? data.item.img_uri : 'https://upload.wikimedia.org/wikipedia/commons/1/11/Vinyl_record_orange.png'" alt="artwork">
+             <b-form-checkbox v-model="selectedRows" :value="data.item.id" size="lg"
+                               class="checkbox" v-if="selectToggle">
+          </b-form-checkbox>
+            
+          </div>
         </template>
         <template v-slot:cell(price)="data">
           {{ data.item.price ? data.item.price + ' €' : '-'}}
@@ -36,7 +54,7 @@
               <div style="cursor: pointer"><i class="fas fa-ellipsis-v text-dark"></i></div>
             </template>
             <b-dropdown-item @click="changeStatus(data.item.id, data.item.status)">
-              {{ data.item.status === 'sold' ? 'Mark In-Stock' : 'Mark Sold' }}
+              {{ data.item.status === 'sold' ? 'Set Available' : 'Set Sold' }}
             </b-dropdown-item>
             <b-dropdown-item @click="editRelease(data.item.id)">Edit</b-dropdown-item>
             <b-dropdown-item v-b-modal.deleteModal @click="selectedToDelete = data.item.id">Delete</b-dropdown-item>
@@ -62,31 +80,36 @@
 
 <script>
 import db from '../firebase/firebase'
-import Sidebar from './Sidebar'
 
 export default {
-  components: {
-    Sidebar
+
+  watch: {
+    '$route.params.page': function () {
+      this.fetchData()
+    },
+
+    selectAll: function () {
+      if (this.selectedRows.length < this.items.length) {
+        this.items.forEach(i => this.selectedRows.push(i.id))
+      } else this.selectedRows = []
+    }
   },
+
   name: 'home',
   data() {
     return {
+      selectAll: false,
       selectToggle: false,
       selectedRows: [],
       selectedToDelete: null,
       sortBy: 'date_added',
       sortDesc: true,
-      fields: [{
-          key: 'check',
-          label: '',
-          sortable: false,
-          thClass: 'd-none',
-          tdClass: 'd-none'
-        },
+      fields: [
         {
           key: 'img',
           label: '',
-          sortable: false
+          sortable: false,
+          
         },
         {
           key: 'title',
@@ -137,12 +160,6 @@ export default {
     this.fetchData();
   },
 
-  watch: {
-    '$route.params.page': function () {
-      this.fetchData()
-    }
-  },
-
   computed: {
 
   },
@@ -173,12 +190,6 @@ export default {
         })
       }
 
-    },
-
-    selectClick() {
-      this.selectToggle = !this.selectToggle;
-      this.fields[0].thClass = this.fields[0].thClass === '' ? 'd-none' : '';
-      this.fields[0].tdClass = this.fields[0].tdClass === '' ? 'd-none' : '';
     },
 
     fetchData() {
@@ -307,5 +318,5 @@ export default {
 </script>
 
 <style lang="css">
-
+  
 </style>

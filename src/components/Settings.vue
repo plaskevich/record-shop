@@ -1,21 +1,18 @@
 <template>
   <div id="">
-    <Sidebar />
     <b-alert style="width: 85%" class="float-right text-center" v-model="showDismissibleAlert" variant="success" dismissible>
       Password changed successfully!
     </b-alert>
     <div style="width: 85%; float:right">
-      <b-card class="m-5 col-lg-6 pl-5">
+      <div class="form-group row">
+            <h4 class="mt-3 offset-lg-1 col">Change password</h4>
+          </div>
+      <b-card class="col-lg-6 offset-lg-1 mt-3">
+        <div class="col-sm-12 mb-3">
+            <a href="javascript:history.go(-1)"><i class="fas fa-angle-left"></i> Back</a>
+          </div>
         <form @submit.prevent="submit"
-              class=" col-md-12 rounded"
-              style="padding: 20px 40px; margin-bottom: 20px;">
-          <h4 class=" mb-5">Change password</h4>
-          <!-- <div class="form-group row">
-            <label class="col-sm-5 col-form-label">Current password</label>
-            <div class="col-sm-7">
-              <input type="text" class="form-control" required v-model="currentPassword">
-            </div>
-          </div> -->
+              class=" col-md-12 rounded pt-4 pb-2">
           <div class="form-group row">
             <label class="col-sm-5 col-form-label">New password</label>
             <div class="col-sm-7">
@@ -34,16 +31,30 @@
           </small>
           </div>
           
-          <div class="mt-5 text-right">
-            <button type="submit" class="btn btn-dark" style="margin-right: 10px">
+          <div class="mt-4 text-right">
+            <button type="submit" class="btn btn-dark col-md-3" :disabled="isLoading" style="margin-right: 10px; height: 44px">
               <span :style="this.dots">Save</span>
-              <div class="loading-dots" v-if="this.isLoading">
-                <div class="loading-dots--dot"></div>
-                <div class="loading-dots--dot"></div>
-                <div class="loading-dots--dot"></div>
+              <div v-if="this.isLoading" class="loader loader--style8">
+                <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                  width="24px" height="30px" viewBox="0 0 24 30" style="enable-background:new 0 0 50 50;" xml:space="preserve">
+                  <rect x="0" y="10" width="4" height="10" fill="#333" opacity="0.2">
+                    <animate attributeName="opacity" attributeType="XML" values="0.2; 1; .2" begin="0s" dur="0.6s" repeatCount="indefinite" />
+                    <animate attributeName="height" attributeType="XML" values="10; 20; 10" begin="0s" dur="0.6s" repeatCount="indefinite" />
+                    <animate attributeName="y" attributeType="XML" values="10; 5; 10" begin="0s" dur="0.6s" repeatCount="indefinite" />
+                  </rect>
+                  <rect x="8" y="10" width="4" height="10" fill="#333"  opacity="0.2">
+                    <animate attributeName="opacity" attributeType="XML" values="0.2; 1; .2" begin="0.15s" dur="0.6s" repeatCount="indefinite" />
+                    <animate attributeName="height" attributeType="XML" values="10; 20; 10" begin="0.15s" dur="0.6s" repeatCount="indefinite" />
+                    <animate attributeName="y" attributeType="XML" values="10; 5; 10" begin="0.15s" dur="0.6s" repeatCount="indefinite" />
+                  </rect>
+                  <rect x="16" y="10" width="4" height="10" fill="#333"  opacity="0.2">
+                    <animate attributeName="opacity" attributeType="XML" values="0.2; 1; .2" begin="0.3s" dur="0.6s" repeatCount="indefinite" />
+                    <animate attributeName="height" attributeType="XML" values="10; 20; 10" begin="0.3s" dur="0.6s" repeatCount="indefinite" />
+                    <animate attributeName="y" attributeType="XML" values="10; 5; 10" begin="0.3s" dur="0.6s" repeatCount="indefinite" />
+                  </rect>
+                </svg>
               </div>
             </button>
-          <router-link to="/"> <button class="btn btn-light">Cancel</button></router-link>
           </div>
         </form>
         </b-card>
@@ -53,12 +64,9 @@
 
 <script>
   import firebase from 'firebase';
-  import Sidebar from './Sidebar';
   import { required, sameAs } from 'vuelidate/lib/validators';
 
   export default {
-    components: { Sidebar },
-
     data () {
       return {
         current: '',
@@ -100,46 +108,3 @@
     },
   }
 </script>
-
-<style lang="scss" scopedSlots>
-  @keyframes dot-keyframes {
-  0% {
-    opacity: 0.4;
-    transform: scale(1, 1);
-  }
-
-  50% {
-    opacity: 1;
-    transform: scale(1.2, 1.2);
-  }
-
-  100% {
-    opacity: 0.4;
-    transform: scale(1, 1);
-  }
-}
-
-.loading-dots {
-  text-align: center;
-  width: 100%;
-
-  &--dot {
-    animation: dot-keyframes 1.5s infinite ease-in-out;
-    background-color: #fff;
-    border-radius: 10px;
-    display: inline-block;
-    height: 5px;
-    width: 5px;
-    margin: 0 3.5px 3px 3.5px;
-
-    &:nth-child(2) {
-      animation-delay: 0.5s;
-    }
-
-    &:nth-child(3) {
-      animation-delay: 1s;
-    }
-  }
-}
-
-</style>
