@@ -81,8 +81,8 @@ svg rect{
 }
 .checkbox {
   position:absolute;
-  right:0px;
-  bottom:-6px;
+  right:15%;
+  bottom:-20%;
 }
 
 .modal-content {

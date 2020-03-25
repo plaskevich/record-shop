@@ -84,10 +84,16 @@
 
 <script>
 import db from '../firebase/firebase'
+import firebase from 'firebase/app'
+import 'firebase/auth'
 
 export default {
-  created() {
-    this.fetchData();
+    created() {
+    var vm = this;
+    firebase.auth().onAuthStateChanged(function(user) {
+      db.collection('users').doc(user.uid).get()
+      .then((doc => vm.shop = doc.data().shop)).then(() => vm.fetchData())
+    });
   },
 
   data() {
@@ -103,6 +109,7 @@ export default {
       notes: null,
       img_uri: null,
       status: null,
+      shop: null,
     }
   },
 
