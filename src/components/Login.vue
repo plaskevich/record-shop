@@ -167,8 +167,10 @@
 </template>
 
 <script>
-import firebase from 'firebase/app';
-import 'firebase/auth';
+// import firebase from 'firebase/app';
+import gql from 'graphql-tag';
+import { clientLogin } from '../auth';
+import store from '../store';
 import { required } from 'vuelidate/lib/validators';
 
 export default {
@@ -184,6 +186,14 @@ export default {
     };
   },
 
+  watch: {
+    authenticated() {
+      if (this.authenticated) {
+        this.$router.push({ name: 'collection' });
+      }
+    },
+  },
+
   validations: {
     form: {
       email: { required },
@@ -196,17 +206,27 @@ export default {
       if (!this.$v.$invalid) {
         this.isLoading = true;
         this.dots = 'display: none';
-        firebase
-          .auth()
-          .signInWithEmailAndPassword(this.form.email, this.form.password)
-          .then(() => {
-            this.$router.push({ name: 'collection' });
-            this.isLoading = false;
+        return this.$apollo
+          .mutate({
+            mutation: gql`
+              mutation signIn($data: LoginInput!) {
+                signIn(data: $data) {
+                  user {
+                    id
+                  }
+                  token
+                }
+              }
+            `,
+            variables: {
+              data: {
+                email: this.form.email,
+                password: this.form.password,
+              },
+            },
           })
-          .catch(err => {
-            this.error = err;
-            this.isLoading = false;
-            this.dots = '';
+          .then((authData) => {
+            clientLogin(authData.data.signIn.token);
           });
       }
     },
@@ -220,6 +240,10 @@ export default {
           this.error.code === 'auth/user-not-found'
         );
       } else return false;
+    },
+
+    authenticated() {
+      return store.state.authenticated;
     },
   },
 };
