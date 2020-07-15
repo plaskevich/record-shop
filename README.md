@@ -1,10 +1,14 @@
 # Record Shop
 
+This is a web app used for managing inventory in a record shop.
+
+A record data can be added manually or imported from [Discogs](https://www.discogs.com/) (one of the biggest music databases).
+
+
+## Run app locally
 In order to use it locally, run the server first.
 
 Server itself and instructions you can find [here](https://github.com/plaskevich/record-shop-server).
-
-## Run app locally
 ### 1. Install dependencies
 `yarn install`
 ### 2. Set credentials
@@ -18,5 +22,3 @@ Replace `<server_url>` with the URL of the server that should be running also lo
 ### 3. Start app
 `yarn serve`
 
-To be able to use the app properly, you would need an already created account.
-Feel free to contact me about this
