@@ -1,12 +1,17 @@
 <template>
   <div>
-    <sidebar-menu hideToggle @item-click="onItemClick" style="width: 15%" :menu="menu" />
+    <sidebar-menu
+      hideToggle
+      @item-click="onItemClick"
+      style="width: 15%"
+      :menu="menu"
+    />
   </div>
 </template>
 
 <script>
-  import firebase from 'firebase/app';
-  import 'firebase/auth';
+import store from '../store';
+import { clientLogout } from '../auth';
 
 export default {
   data() {
@@ -23,41 +28,51 @@ export default {
         {
           href: '/collection',
           title: 'All Collection',
-          icon: 'fas fa-stream'
+          icon: 'fas fa-stream',
         },
         {
-          href: '/collection/in-stock',
+          href: '/collection/inStock',
           title: 'In Stock',
-          icon: 'fas fa-store'
+          icon: 'fas fa-store',
         },
         {
           href: '/collection/sold',
           title: 'Sold',
-          icon: 'fas fa-wallet'
+          icon: 'fas fa-wallet',
         },
-        {
-          href: '/settings',
-          title: 'Settings',
-          icon: 'fas fa-cogs'
-        },
+        // {
+        //   href: '/settings',
+        //   title: 'Settings',
+        //   icon: 'fas fa-cogs',
+        // },
         {
           title: 'Logout',
-          icon: 'fas fa-sign-out-alt'
+          icon: 'fas fa-sign-out-alt',
         },
-      ]
-    }
+      ],
+    };
+  },
+
+  watch: {
+    authenticated() {
+      if (!this.authenticated) {
+        this.$router.push({ name: 'login' });
+      }
+    },
   },
 
   methods: {
     onItemClick(event, item) {
-      if(item.title === 'Logout') {
-        firebase.auth().signOut().then(function() {
-          this.$router.push('login')
-        }).catch(function(error) {
-          return error
-        });
+      if (item.title === 'Logout') {
+        clientLogout();
       }
-    }
-  }
-}
+    },
+  },
+
+  computed: {
+    authenticated() {
+      return store.state.authenticated;
+    },
+  },
+};
 </script>

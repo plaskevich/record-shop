@@ -1,11 +1,11 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import store from './store';
 import Collection from '@/components/Collection'
 import Login from '@/components/Login'
 import EditRelease from '@/components/EditRelease'
 import ViewRelease from '@/components/ViewRelease'
 import Settings from '@/components/Settings'
-import firebase from 'firebase/app';
 import 'firebase/auth';
 
 Vue.use(Router)
@@ -22,7 +22,6 @@ const router = new Router({
       name: 'collection',
       component: Collection,
       props: true
-
     },
     {
       path: '/login',
@@ -55,10 +54,8 @@ const router = new Router({
 })
 
 router.beforeEach((to, from, next) => {
-  firebase.auth().onAuthStateChanged(function(user) {
-    if (!user && to.path !== '/login') next('/login')
+  if (!store.state.authenticated && to.path !== '/login') next('/login')
     else next()
-  });
 })
 
 export default router;
