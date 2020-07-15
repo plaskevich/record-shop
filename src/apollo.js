@@ -1,9 +1,10 @@
 import VueApollo from 'vue-apollo';
 import { ApolloClient } from 'apollo-client'
+import { concat } from 'apollo-link';
 import { createHttpLink } from 'apollo-link-http'
 import { setContext } from 'apollo-link-context';
 import { InMemoryCache } from 'apollo-cache-inmemory'
-import config from '../config'
+import config from './config'
 
 const httpLink = createHttpLink({
   uri: config.graphqlURL,
@@ -11,18 +12,28 @@ const httpLink = createHttpLink({
 
 const authLink = setContext((_, { headers }) => {
   const session = JSON.parse(localStorage.getItem('session'));
-  return {
-    headers: {
-      ...headers,
-      authorization: session.token ? `Bearer ${session.token}` : "",
+  if (session) {
+    return {
+      headers: {
+        ...headers,
+        authorization: session.token ? `Bearer ${session.token}` : "",
+      }
+    }
+  } else {
+    return {
+      headers: {
+        ...headers,
+        authorization: "",
+      }
     }
   }
+  
 });
 
 const cache = new InMemoryCache()
 
 const apolloClient = new ApolloClient({
-  link: authLink.concat(httpLink),
+  link: concat(authLink, httpLink),
   cache,
 })
 
