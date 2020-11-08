@@ -17,14 +17,14 @@ const authLink = setContext((_, { headers }) => {
     return {
       headers: {
         ...headers,
-        authorization: session.token ? `Bearer ${session.token}` : "",
+        Authorization: session.token ? `Bearer ${session.token}` : "",
       }
     }
   } else {
     return {
       headers: {
         ...headers,
-        authorization: "",
+        Authorization: "",
       }
     }
   }
