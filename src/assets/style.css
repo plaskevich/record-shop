@@ -68,10 +68,10 @@
   box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
 }
 
-svg path,
+/* svg path,
 svg rect{
   fill: #fff;
-}
+} */
 
 .checkbox-img {
   position:relative;

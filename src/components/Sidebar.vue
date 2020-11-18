@@ -10,35 +10,40 @@
 </template>
 
 <script>
-import store from '../store';
-import { clientLogout } from '../auth';
+import store from "../store";
+import { clientLogout } from "../auth";
 
 export default {
   data() {
     return {
       user: {
-        name: 'Alex',
+        name: "Alex",
       },
 
       menu: [
         {
           header: true,
-          title: 'Record Shop',
+          title: "Record Shop",
         },
         {
-          href: '/collection',
-          title: 'All Collection',
-          icon: 'fas fa-stream',
+          href: "/collection",
+          title: "All Collection",
+          icon: "fa fa-stream",
         },
         {
-          href: '/collection/inStock',
-          title: 'In Stock',
-          icon: 'fas fa-store',
+          href: "/collection/inStock",
+          title: "In Stock",
+          icon: "fas fa-store",
         },
         {
-          href: '/collection/sold',
-          title: 'Sold',
-          icon: 'fas fa-wallet',
+          href: "/collection/sold",
+          title: "Sold",
+          icon: "fas fa-wallet",
+        },
+        {
+          href: "/statistics",
+          title: "Statistics",
+          icon: "fas fa-chart-pie",
         },
         // {
         //   href: '/settings',
@@ -46,8 +51,8 @@ export default {
         //   icon: 'fas fa-cogs',
         // },
         {
-          title: 'Logout',
-          icon: 'fas fa-sign-out-alt',
+          title: "Logout",
+          icon: "fas fa-sign-out-alt",
         },
       ],
     };
@@ -56,14 +61,14 @@ export default {
   watch: {
     authenticated() {
       if (!this.authenticated) {
-        this.$router.push({ name: 'login' });
+        this.$router.push({ name: "login" });
       }
     },
   },
 
   methods: {
     onItemClick(event, item) {
-      if (item.title === 'Logout') {
+      if (item.title === "Logout") {
         clientLogout();
       }
     },

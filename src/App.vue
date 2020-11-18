@@ -12,7 +12,7 @@ import Sidebar from "./components/Sidebar";
 
 export default {
   name: "app",
-  components: { Sidebar }
+  components: { Sidebar },
 };
 </script>
 

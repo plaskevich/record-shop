@@ -1,6 +1,6 @@
 <template>
   <div class="pt-2">
-    <div style="width: 85%; float: right;">
+    <div style="width: 85%; float: right">
       <b-navbar>
         <b-form-input
           v-model="filter"
@@ -12,7 +12,7 @@
           class="btn btn-link text-dark pt-0 ml-3"
           @click="selectToggle = !selectToggle"
         >
-          {{ selectToggle ? 'Cancel' : 'Select' }}
+          {{ selectToggle ? "Cancel" : "Select" }}
         </button>
         <div class="ml-5" :class="!selectToggle ? 'invisible' : 'visible'">
           <button
@@ -42,7 +42,7 @@
         </div>
         <div class="col">
           <router-link to="/new" class="nav-item float-right">
-            <button style="border-radius: 20px;" class="btn btn-dark">
+            <button style="border-radius: 20px" class="btn btn-dark">
               + Add Release
             </button>
           </router-link>
@@ -52,7 +52,7 @@
         <b-table
           @row-clicked="rowClick"
           no-sort-reset
-          style="cursor: pointer; margin-bottom: 60px;"
+          style="cursor: pointer; margin-bottom: 60px"
           :tbody-tr-class="rowClass"
           :items="items"
           :fields="fields"
@@ -70,7 +70,7 @@
             <b-form-checkbox
               v-model="selectAll"
               size="lg"
-              style="margin-left: 10px;"
+              style="margin-left: 10px"
               v-if="selectToggle"
             ></b-form-checkbox>
           </template>
@@ -78,7 +78,7 @@
             <div class="checkbox-img">
               <img
                 :style="selectToggle ? ' filter: brightness(60%)' : ''"
-                style="max-width: 40px;"
+                style="max-width: 40px"
                 :src="
                   isLink(data.item.img_uri)
                     ? data.item.img_uri
@@ -96,7 +96,7 @@
             </div>
           </template>
           <template v-slot:cell(price)="data">{{
-            data.item.price ? data.item.price + ' €' : '-'
+            data.item.price ? data.item.price + " €" : "-"
           }}</template>
           <template v-slot:cell(date_added)="data">{{
             new Date(data.item.date_added).toLocaleDateString()
@@ -109,14 +109,14 @@
               no-caret
             >
               <template v-slot:button-content>
-                <div style="cursor: pointer;">
+                <div style="cursor: pointer">
                   <i class="fas fa-ellipsis-v text-dark"></i>
                 </div>
               </template>
               <b-dropdown-item
                 @click="changeStatus(data.item.id, data.item.status)"
                 >{{
-                  data.item.status === 'sold' ? 'Set Available' : 'Set Sold'
+                  data.item.status === "sold" ? "Set Available" : "Set Sold"
                 }}</b-dropdown-item
               >
               <b-dropdown-item @click="editRelease(data.item.id)"
@@ -154,9 +154,9 @@
           <div class="d-block text-center">
             <h5>
               {{
-                'Are you sure you want to delete ' +
-                  selectedRows.length +
-                  ' record(s)?'
+                "Are you sure you want to delete " +
+                selectedRows.length +
+                " record(s)?"
               }}
             </h5>
           </div>
@@ -167,10 +167,10 @@
 </template>
 
 <script>
-import gql from 'graphql-tag';
+import gql from "graphql-tag";
 
 export default {
-  name: 'home',
+  name: "home",
   data() {
     return {
       shop: null,
@@ -178,50 +178,50 @@ export default {
       selectToggle: false,
       selectedRows: [],
       selectedToDelete: [],
-      sortBy: 'date_added',
+      sortBy: "date_added",
       sortDesc: true,
       fields: [
         {
-          key: 'img',
-          label: '',
+          key: "img",
+          label: "",
           sortable: false,
         },
         {
-          key: 'title',
+          key: "title",
           sortable: true,
         },
         {
-          key: 'artist',
+          key: "artist",
           sortable: true,
         },
         {
-          key: 'label',
+          key: "label",
           sortable: true,
         },
         {
-          key: 'year',
+          key: "year",
           sortable: true,
         },
         {
-          key: 'genre',
+          key: "genre",
           sortable: false,
         },
         {
-          key: 'condition',
+          key: "condition",
           sortable: false,
         },
         {
-          key: 'date_added',
-          label: 'Date',
+          key: "date_added",
+          label: "Date",
           sortable: true,
         },
         {
-          key: 'price',
+          key: "price",
           sortable: true,
         },
         {
-          key: 'options',
-          label: '',
+          key: "options",
+          label: "",
           sortable: false,
         },
       ],
@@ -230,16 +230,16 @@ export default {
     };
   },
 
-  created: function() {
+  created: function () {
     this.fetchData();
   },
 
   watch: {
-    $route: function() {
+    $route: function () {
       this.fetchData();
     },
 
-    selectAll: function() {
+    selectAll: function () {
       if (this.selectedRows.length < this.items.length) {
         this.items.forEach((i) => this.selectedRows.push(i.id));
       } else this.selectedRows = [];
@@ -258,14 +258,14 @@ export default {
 
     rowClass(item) {
       if (!item) return;
-      if (item.status === 'sold' && !this.$route.params.page)
-        return 'table-warning';
+      if (item.status === "sold" && !this.$route.params.page)
+        return "table-warning";
     },
 
     rowClick(row) {
       if (!this.selectToggle) {
         this.$router.push({
-          name: 'view-release',
+          name: "view-release",
           params: {
             id: row.id,
           },
@@ -274,9 +274,9 @@ export default {
     },
 
     fetchData() {
-      if (this.$route.params.page === 'sold') {
+      if (this.$route.params.page === "sold") {
         this.fetchSoldRecords();
-      } else if (this.$route.params.page === 'inStock') {
+      } else if (this.$route.params.page === "inStock") {
         this.fetchStockRecords();
       } else {
         this.fetchAllRecords();
@@ -304,7 +304,7 @@ export default {
               }
             }
           `,
-          fetchPolicy: 'no-cache',
+          fetchPolicy: "no-cache",
         })
         .then((result) => {
           this.items = result.data.getAllRecords;
@@ -332,7 +332,7 @@ export default {
               }
             }
           `,
-          fetchPolicy: 'no-cache',
+          fetchPolicy: "no-cache",
         })
         .then((result) => (this.items = result.data.getSoldRecords));
     },
@@ -357,13 +357,13 @@ export default {
               }
             }
           `,
-          fetchPolicy: 'no-cache',
+          fetchPolicy: "no-cache",
         })
         .then((result) => (this.items = result.data.getStockRecords));
     },
 
     changeStatus(id, status) {
-      if (status === 'sold') {
+      if (status === "sold") {
         this.$apollo
           .mutate({
             mutation: gql`
@@ -376,7 +376,7 @@ export default {
             variables: {
               id,
             },
-            fetchPolicy: 'no-cache',
+            fetchPolicy: "no-cache",
           })
           .then(() => this.fetchData());
       } else {
@@ -392,7 +392,7 @@ export default {
             variables: {
               id,
             },
-            fetchPolicy: 'no-cache',
+            fetchPolicy: "no-cache",
           })
           .then(() => this.fetchData());
       }
@@ -400,7 +400,7 @@ export default {
 
     editRelease(id) {
       this.$router.push({
-        name: 'edit-release',
+        name: "edit-release",
         params: {
           id,
         },
@@ -422,7 +422,7 @@ export default {
             variables: {
               id: e,
             },
-            fetchPolicy: 'no-cache',
+            fetchPolicy: "no-cache",
           })
           .then(() => {
             items++;
@@ -437,7 +437,7 @@ export default {
       var items = 0;
       this.selectedRows
         .forEach((e) => {
-          this.changeStatus(e, 'inStock');
+          this.changeStatus(e, "inStock");
         })
         .then(() => {
           items++;
@@ -451,7 +451,7 @@ export default {
       var items = 0;
       this.selectedRows
         .forEach((e) => {
-          this.changeStatus(e, 'sold');
+          this.changeStatus(e, "sold");
         })
         .then(() => {
           items++;

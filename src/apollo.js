@@ -12,7 +12,6 @@ const httpLink = createHttpLink({
 
 const authLink = setContext((_, { headers }) => {
   const session = JSON.parse(localStorage.getItem('session'));
-  console.log(session);
   if (session) {
     return {
       headers: {

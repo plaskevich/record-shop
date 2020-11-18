@@ -6,6 +6,7 @@ import Login from '@/components/Login'
 import EditRelease from '@/components/EditRelease'
 import ViewRelease from '@/components/ViewRelease'
 import Settings from '@/components/Settings'
+import Statistics from '@/components/Statistics'
 import 'firebase/auth';
 
 Vue.use(Router)
@@ -49,6 +50,11 @@ const router = new Router({
       path: '/settings',
       name: 'settings',
       component: Settings,
+    },
+    {
+      path: '/statistics',
+      name: 'statistics',
+      component: Statistics,
     }
   ]
 })
