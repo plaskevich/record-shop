@@ -1,6 +1,6 @@
 <template>
   <div id="form-release">
-    <div style="width: 85%; float:right">
+    <div style="width: 85%; float: right">
       <div class="form-group row">
         <h4 class="mt-3 offset-lg-1 col">Edit Record</h4>
       </div>
@@ -10,11 +10,12 @@
             ><i class="fas fa-angle-left"></i> Back</a
           >
         </div>
-        <form @submit.prevent="submit" class=" col-md-12 pt-2 pb-2">
+        <form @submit.prevent="submit" class="col-md-12 pt-2 pb-2">
           <h6 class="text-center mb-4 text-muted">Import data from Disogs:</h6>
           <div class="form-group row">
             <div class="col-sm-3 offset-md-4">
               <input
+                id="discogs-id"
                 placeholder="Release ID"
                 type="text"
                 class="form-control"
@@ -22,8 +23,9 @@
               />
             </div>
             <button
+              id="ok-btn"
               type="button"
-              style="height: 2rem; line-height:1.2rem"
+              style="height: 2rem; line-height: 1.2rem"
               @click="addFromDiscogs(discogsId)"
               class="btn btn-dark"
             >
@@ -38,6 +40,7 @@
             <label class="col-sm-2 col-form-label">Title</label>
             <div class="col-sm-4">
               <input
+                id="title"
                 type="text"
                 class="form-control"
                 required
@@ -47,6 +50,7 @@
             <label class="col-sm-2 col-form-label">Condition</label>
             <div class="col-sm-4">
               <select
+                id="condition"
                 class="form-control col-sm-12"
                 v-model="form.condition"
                 required
@@ -67,6 +71,7 @@
             <label class="col-sm-2 col-form-label">Artist</label>
             <div class="col-sm-4">
               <input
+                id="artist"
                 type="text"
                 class="form-control"
                 required
@@ -81,11 +86,20 @@
           <div class="form-group row">
             <label class="col-sm-2 col-form-label">Label</label>
             <div class="col-sm-4">
-              <input type="text" class="form-control" v-model="form.label" />
+              <input
+                id="label"
+                type="text"
+                class="form-control"
+                v-model="form.label"
+              />
             </div>
             <label class="col-sm-2 col-form-label">Status</label>
             <div class="col-sm-4">
-              <select class="form-control col-sm-12" v-model="form.status">
+              <select
+                id="status"
+                class="form-control col-sm-12"
+                v-model="form.status"
+              >
                 <option value="inStock" selected>In Stock</option>
                 <option value="sold">Sold</option>
               </select>
@@ -94,23 +108,39 @@
           <div class="form-group row">
             <label class="col-sm-2 col-form-label">Genre</label>
             <div class="col-sm-4">
-              <input type="text" class="form-control" v-model="form.genre" />
+              <input
+                id="genre"
+                type="text"
+                class="form-control"
+                v-model="form.genre"
+              />
             </div>
             <label class="col-sm-2 col-form-label">Image URL</label>
             <div class="col-sm-4">
-              <input type="text" class="form-control" v-model="form.img_uri" />
+              <input
+                id="imgUrl"
+                type="text"
+                class="form-control"
+                v-model="form.img_uri"
+              />
             </div>
           </div>
           <div class="form-group row">
             <label class="col-sm-2 col-form-label">Year</label>
             <div class="col-sm-4">
-              <input type="number" class="form-control" v-model="form.year" />
+              <input
+                id="year"
+                type="number"
+                class="form-control"
+                v-model.number="form.year"
+              />
             </div>
             <label class="col-sm-2 col-form-label">Notes</label>
             <div class="col-sm-4">
               <textarea
+                id="notes"
                 maxlength="250"
-                style="resize: none;"
+                style="resize: none"
                 rows="2"
                 class="form-control"
                 v-model="form.notes"
@@ -120,6 +150,7 @@
           </div>
           <div class="text-right mt-4">
             <button
+              id="save-btn"
               type="submit"
               class="btn btn-dark"
               style="margin-right: 10px"
@@ -134,8 +165,8 @@
 </template>
 
 <script>
-import axios from 'axios';
-import gql from 'graphql-tag';
+import axios from "axios";
+import gql from "graphql-tag";
 
 export default {
   props: {
@@ -156,7 +187,7 @@ export default {
         condition: null,
         price: null,
         notes: null,
-        status: 'inStock',
+        status: "inStock",
         img_uri: null,
       },
       error: null,
@@ -171,7 +202,7 @@ export default {
   },
 
   watch: {
-    $route: 'fetchData',
+    $route: "fetchData",
   },
 
   methods: {
@@ -197,7 +228,7 @@ export default {
           variables: {
             id: this.$route.params.id,
           },
-          fetchPolicy: 'no-cache',
+          fetchPolicy: "no-cache",
         })
         .then((result) => {
           delete result.data.getRecord.__typename;
@@ -222,7 +253,7 @@ export default {
           variables: {
             data: this.form,
           },
-          fetchPolicy: 'no-cache',
+          fetchPolicy: "no-cache",
         })
         .then(() => {
           this.$router.go(-1);
@@ -243,7 +274,7 @@ export default {
             data: this.form,
             id: this.$route.params.id,
           },
-          fetchPolicy: 'no-cache',
+          fetchPolicy: "no-cache",
         })
         .then(() => {
           this.$router.go(-1);
@@ -251,11 +282,11 @@ export default {
     },
 
     addFromDiscogs(id) {
-      const myKey = 'RQjHhwSaMHxwGbPxJxXz';
-      const mySecret = 'BIdsSStHDrPRlaWqpKiEeKTEkaHmSrwY';
+      const myKey = "RQjHhwSaMHxwGbPxJxXz";
+      const mySecret = "BIdsSStHDrPRlaWqpKiEeKTEkaHmSrwY";
       axios
         .get(
-          `https://api.discogs.com/releases/${id}?key=${myKey}&secret=${mySecret}`,
+          `https://api.discogs.com/releases/${id}?key=${myKey}&secret=${mySecret}`
         )
         .then((response) => {
           this.discogsId = null;
@@ -264,10 +295,10 @@ export default {
           let labels = [];
           this.form.title = data.title;
           data.artists.forEach((e) => artists.push(e.name));
-          this.form.artist = artists.join(' & ');
+          this.form.artist = artists.join(" & ");
           data.labels.forEach((e) => labels.push(e.name));
-          this.form.label = labels.join(', ');
-          this.form.genre = data.genres.join(', ');
+          this.form.label = labels.join(", ");
+          this.form.genre = data.genres.join(", ");
           this.form.year = data.year;
           this.form.img_uri = data.images[0].uri;
         })

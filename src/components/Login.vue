@@ -4,8 +4,7 @@
     <b-form @submit.prevent="login" class="mt-5">
       <b-card
         bg-variant="light"
-        class="offset-lg-4 offset-md-3 offset-sm-2 offset-xs-1 
-                                        col-lg-4 col-md-6 col-sm-8 col-xs-10"
+        class="offset-lg-4 offset-md-3 offset-sm-2 offset-xs-1 col-lg-4 col-md-6 col-sm-8 col-xs-10"
       >
         <h3 class="text-center mt-4">Welcome!</h3>
         <b-form-group
@@ -38,6 +37,7 @@
             Wrong username or password
           </small>
           <button
+            id="submit"
             type="submit"
             :disabled="isLoading"
             style="display: block; margin: 20px auto; height: 44px"
@@ -55,7 +55,7 @@
                 width="24px"
                 height="30px"
                 viewBox="0 0 24 30"
-                style="enable-background:new 0 0 50 50;"
+                style="enable-background: new 0 0 50 50"
                 xml:space="preserve"
               >
                 <rect
@@ -168,20 +168,20 @@
 
 <script>
 // import firebase from 'firebase/app';
-import gql from 'graphql-tag';
-import { clientLogin } from '../auth';
-import store from '../store';
-import { required } from 'vuelidate/lib/validators';
+import gql from "graphql-tag";
+import { clientLogin } from "../auth";
+import store from "../store";
+import { required } from "vuelidate/lib/validators";
 
 export default {
   data() {
     return {
       error: null,
       isLoading: false,
-      dots: '',
+      dots: "",
       form: {
-        email: '',
-        password: '',
+        email: "",
+        password: "",
       },
     };
   },
@@ -189,7 +189,7 @@ export default {
   watch: {
     authenticated() {
       if (this.authenticated) {
-        this.$router.push({ name: 'collection' });
+        this.$router.push({ name: "collection" });
       }
     },
   },
@@ -205,7 +205,7 @@ export default {
     login() {
       if (!this.$v.$invalid) {
         this.isLoading = true;
-        this.dots = 'display: none';
+        this.dots = "display: none";
         return this.$apollo
           .mutate({
             mutation: gql`
@@ -236,8 +236,8 @@ export default {
     userPassError() {
       if (this.error) {
         return (
-          this.error.code === 'auth/wrong-password' ||
-          this.error.code === 'auth/user-not-found'
+          this.error.code === "auth/wrong-password" ||
+          this.error.code === "auth/user-not-found"
         );
       } else return false;
     },

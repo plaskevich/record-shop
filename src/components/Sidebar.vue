@@ -53,6 +53,7 @@ export default {
         {
           title: "Logout",
           icon: "fas fa-sign-out-alt",
+          class: "logout",
         },
       ],
     };
