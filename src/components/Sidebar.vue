@@ -45,6 +45,11 @@ export default {
           title: "Statistics",
           icon: "fas fa-chart-pie",
         },
+        {
+          href: "/management",
+          title: "Management",
+          icon: "fas fa-users-cog",
+        },
         // {
         //   href: '/settings',
         //   title: 'Settings',

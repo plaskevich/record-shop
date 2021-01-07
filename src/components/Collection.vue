@@ -179,7 +179,7 @@ export default {
       selectedRows: [],
       selectedToDelete: [],
       sortBy: "date_added",
-      sortDesc: true,
+      sortDesc: false,
       fields: [
         {
           key: "img",

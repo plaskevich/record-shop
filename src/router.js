@@ -6,6 +6,7 @@ import Login from '@/components/Login'
 import EditRelease from '@/components/EditRelease'
 import ViewRelease from '@/components/ViewRelease'
 import Settings from '@/components/Settings'
+import Management from '@/components/Management'
 import Statistics from '@/components/Statistics'
 import 'firebase/auth';
 
@@ -52,6 +53,11 @@ const router = new Router({
       component: Settings,
     },
     {
+      path: '/management',
+      name: 'management',
+      component: Management,
+    },
+    {
       path: '/statistics',
       name: 'statistics',
       component: Statistics,
@@ -61,7 +67,7 @@ const router = new Router({
 
 router.beforeEach((to, from, next) => {
   if (!store.state.authenticated && to.path !== '/login') next('/login')
-    else next()
+  else next()
 })
 
 export default router;
