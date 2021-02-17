@@ -7,7 +7,6 @@ import EditRelease from '@/components/EditRelease'
 import ViewRelease from '@/components/ViewRelease'
 import Settings from '@/components/Settings'
 import Statistics from '@/components/Statistics'
-import 'firebase/auth';
 
 Vue.use(Router)
 
@@ -61,7 +60,7 @@ const router = new Router({
 
 router.beforeEach((to, from, next) => {
   if (!store.state.authenticated && to.path !== '/login') next('/login')
-    else next()
+  else next()
 })
 
 export default router;

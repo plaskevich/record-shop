@@ -7,27 +7,7 @@ afterEach(() => {
 });
 
 describe('Add release', () => {
-    const importedRelease = {
-        title: "The Pub That Doesn't Sell Beer/ Are The Good Old Days Gone",
-        artist: 'Slim Dusty & The Travelling Country Band',
-        label: 'Columbia',
-        genre: 'Folk, World, & Country',
-        year: '1982',
-        status: 'inStock',
-        imgUrl: 'https://img.discogs.com/qYKn3jUmymYVluU8w3F74WeunDU=/fit-in/599x600/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-16231767-1605680200-3104.jpeg.jpg'
-    }
 
-    const newReleaseData = {
-        title: "The Test",
-        artist: 'DJ Test',
-        label: 'Test Records',
-        genre: 'Minimal Test',
-        year: '2020',
-        status: 'sold',
-        price: '69',
-        condition: 'M',
-        notes: "Don't panic, this is only a test"
-    }
     it('Add release from Discogs', () => {
         cy.login()
         cy.get('#add-release').click()
@@ -45,6 +25,7 @@ describe('Add release', () => {
         cy.visit('/collection')
         cy.get('.releaseRow').should('contain', importedRelease.title)
     });
+
     it('Search and delete release', () => {
         cy.visit('/collection')
         cy.get('#search').type(importedRelease.title)
@@ -56,6 +37,7 @@ describe('Add release', () => {
         cy.get('.releaseRow').should('have.length', 0)
         cy.get('#search').clear()
     })
+
     it('Edit release', () => {
         cy.visit('/collection')
         cy.get('.releaseRow').should('have.length', 2)
@@ -79,3 +61,25 @@ describe('Add release', () => {
         cy.get('.releaseRow').should('contain', newReleaseData.title)
     });
 });
+
+const importedRelease = {
+    title: "The Pub That Doesn't Sell Beer/ Are The Good Old Days Gone",
+    artist: 'Slim Dusty & The Travelling Country Band',
+    label: 'Columbia',
+    genre: 'Folk, World, & Country',
+    year: '1982',
+    status: 'inStock',
+    imgUrl: 'https://img.discogs.com/qYKn3jUmymYVluU8w3F74WeunDU=/fit-in/599x600/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-16231767-1605680200-3104.jpeg.jpg'
+}
+
+const newReleaseData = {
+    title: "The Test",
+    artist: 'DJ Test',
+    label: 'Test Records',
+    genre: 'Minimal Test',
+    year: '2020',
+    status: 'sold',
+    price: '69',
+    condition: 'M',
+    notes: "Don't panic, this is only a test"
+}

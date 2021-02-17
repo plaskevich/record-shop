@@ -42,7 +42,7 @@ export default {
     getGenreStatistics() {
       this.getGenreStatistics.forEach((e) => {
         this.chartOptions.labels.push(e.genre);
-        this.series.push(e.percent);
+        this.series.push(Number(e.percent.toFixed(1)));
       });
     },
   },

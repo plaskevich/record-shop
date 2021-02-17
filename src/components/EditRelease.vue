@@ -2,7 +2,8 @@
   <div id="form-release">
     <div style="width: 85%; float: right">
       <div class="form-group row">
-        <h4 class="mt-3 offset-lg-1 col">Edit Record</h4>
+        <h4 v-if="editable" class="mt-3 offset-lg-1 col">Edit Record</h4>
+        <h4 v-if="!editable" class="mt-3 offset-lg-1 col">Add Record</h4>
       </div>
       <b-card class="col-lg-10 offset-lg-1 mt-3">
         <div class="col-sm-12">
