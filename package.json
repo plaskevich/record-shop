@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@babel/helper-validator-option": "^7.12.1",
-    "apexcharts": "^3.22.2",
+    "apexcharts": "^3.24.0",
     "apollo-cache-inmemory": "^1.6.6",
     "apollo-client": "^2.6.10",
     "apollo-link": "^1.2.14",
