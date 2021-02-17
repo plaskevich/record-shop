@@ -1,8 +1,9 @@
 <template>
   <div id="form-release">
-    <div style="width: 85%; float:right">
+    <div style="width: 85%; float: right">
       <div class="form-group row">
-        <h4 class="mt-3 offset-lg-1 col">Edit Record</h4>
+        <h4 v-if="editable" class="mt-3 offset-lg-1 col">Edit Record</h4>
+        <h4 v-if="!editable" class="mt-3 offset-lg-1 col">Add Record</h4>
       </div>
       <b-card class="col-lg-10 offset-lg-1 mt-3">
         <div class="col-sm-12">
@@ -10,7 +11,7 @@
             ><i class="fas fa-angle-left"></i> Back</a
           >
         </div>
-        <form @submit.prevent="submit" class=" col-md-12 pt-2 pb-2">
+        <form @submit.prevent="submit" class="col-md-12 pt-2 pb-2">
           <h6 class="text-center mb-4 text-muted">Import data from Disogs:</h6>
           <div class="form-group row">
             <div class="col-sm-3 offset-md-4">
@@ -23,7 +24,7 @@
             </div>
             <button
               type="button"
-              style="height: 2rem; line-height:1.2rem"
+              style="height: 2rem; line-height: 1.2rem"
               @click="addFromDiscogs(discogsId)"
               class="btn btn-dark"
             >
@@ -110,7 +111,7 @@
             <div class="col-sm-4">
               <textarea
                 maxlength="250"
-                style="resize: none;"
+                style="resize: none"
                 rows="2"
                 class="form-control"
                 v-model="form.notes"
@@ -134,8 +135,8 @@
 </template>
 
 <script>
-import axios from 'axios';
-import gql from 'graphql-tag';
+import axios from "axios";
+import gql from "graphql-tag";
 
 export default {
   props: {
@@ -156,7 +157,7 @@ export default {
         condition: null,
         price: null,
         notes: null,
-        status: 'inStock',
+        status: "inStock",
         img_uri: null,
       },
       error: null,
@@ -171,7 +172,7 @@ export default {
   },
 
   watch: {
-    $route: 'fetchData',
+    $route: "fetchData",
   },
 
   methods: {
@@ -197,7 +198,7 @@ export default {
           variables: {
             id: this.$route.params.id,
           },
-          fetchPolicy: 'no-cache',
+          fetchPolicy: "no-cache",
         })
         .then((result) => {
           delete result.data.getRecord.__typename;
@@ -222,7 +223,7 @@ export default {
           variables: {
             data: this.form,
           },
-          fetchPolicy: 'no-cache',
+          fetchPolicy: "no-cache",
         })
         .then(() => {
           this.$router.go(-1);
@@ -243,7 +244,7 @@ export default {
             data: this.form,
             id: this.$route.params.id,
           },
-          fetchPolicy: 'no-cache',
+          fetchPolicy: "no-cache",
         })
         .then(() => {
           this.$router.go(-1);
@@ -251,11 +252,11 @@ export default {
     },
 
     addFromDiscogs(id) {
-      const myKey = 'RQjHhwSaMHxwGbPxJxXz';
-      const mySecret = 'BIdsSStHDrPRlaWqpKiEeKTEkaHmSrwY';
+      const myKey = "RQjHhwSaMHxwGbPxJxXz";
+      const mySecret = "BIdsSStHDrPRlaWqpKiEeKTEkaHmSrwY";
       axios
         .get(
-          `https://api.discogs.com/releases/${id}?key=${myKey}&secret=${mySecret}`,
+          `https://api.discogs.com/releases/${id}?key=${myKey}&secret=${mySecret}`
         )
         .then((response) => {
           this.discogsId = null;
@@ -264,10 +265,10 @@ export default {
           let labels = [];
           this.form.title = data.title;
           data.artists.forEach((e) => artists.push(e.name));
-          this.form.artist = artists.join(' & ');
+          this.form.artist = artists.join(" & ");
           data.labels.forEach((e) => labels.push(e.name));
-          this.form.label = labels.join(', ');
-          this.form.genre = data.genres.join(', ');
+          this.form.label = labels.join(", ");
+          this.form.genre = data.genres.join(", ");
           this.form.year = data.year;
           this.form.img_uri = data.images[0].uri;
         })

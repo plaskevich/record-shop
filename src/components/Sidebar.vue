@@ -40,11 +40,11 @@ export default {
           title: "Sold",
           icon: "fas fa-wallet",
         },
-        {
-          href: "/statistics",
-          title: "Statistics",
-          icon: "fas fa-chart-pie",
-        },
+        // {
+        //   href: "/statistics",
+        //   title: "Statistics",
+        //   icon: "fas fa-chart-pie",
+        // },
         {
           href: "/management",
           title: "Management",
