@@ -3,6 +3,7 @@
     <div style="width: 85%; float: right">
       <b-navbar>
         <b-form-input
+          id="search"
           v-model="filter"
           class="col-sm-3 searchbar mb-2"
           placeholder="Search..."
@@ -42,7 +43,11 @@
         </div>
         <div class="col">
           <router-link to="/new" class="nav-item float-right">
-            <button style="border-radius: 20px" class="btn btn-dark">
+            <button
+              id="add-release"
+              style="border-radius: 20px"
+              class="btn btn-dark"
+            >
               + Add Release
             </button>
           </router-link>
@@ -82,7 +87,7 @@
                 :src="
                   isLink(data.item.img_uri)
                     ? data.item.img_uri
-                    : 'https://upload.wikimedia.org/wikipedia/commons/1/11/Vinyl_record_orange.png'
+                    : 'img/vinyl.png'
                 "
                 alt="artwork"
               />
@@ -103,6 +108,7 @@
           }}</template>
           <template v-slot:cell(options)="data">
             <b-dropdown
+              id="options"
               variant="link"
               dropleft
               toggle-class="text-decoration-none"
@@ -119,10 +125,13 @@
                   data.item.status === "sold" ? "Set Available" : "Set Sold"
                 }}</b-dropdown-item
               >
-              <b-dropdown-item @click="editRelease(data.item.id)"
+              <b-dropdown-item
+                id="edit-release"
+                @click="editRelease(data.item.id)"
                 >Edit</b-dropdown-item
               >
               <b-dropdown-item
+                id="delete-release"
                 v-b-modal.deleteModal
                 @click="selectedToDelete = [data.item.id]"
                 >Delete</b-dropdown-item
@@ -258,8 +267,11 @@ export default {
 
     rowClass(item) {
       if (!item) return;
-      if (item.status === "sold" && !this.$route.params.page)
-        return "table-warning";
+      if (item.status === "sold" && !this.$route.params.page) {
+        return "table-warning releaseRow";
+      } else {
+        return "releaseRow";
+      }
     },
 
     rowClick(row) {

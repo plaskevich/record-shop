@@ -31,12 +31,17 @@
         </b-form-group>
         <b-form-group>
           <small class="text-danger" v-if="this.error && !userPassError">
-            {{ error.message }}
+            {{ error }}
           </small>
-          <small v-if="userPassError" class="text-danger">
+          <small
+            id="credentials-error"
+            v-if="userPassError"
+            class="text-danger"
+          >
             Wrong username or password
           </small>
           <button
+            id="submit"
             type="submit"
             :disabled="isLoading"
             style="display: block; margin: 20px auto; height: 44px"
@@ -166,7 +171,6 @@
 </template>
 
 <script>
-// import firebase from 'firebase/app';
 import gql from "graphql-tag";
 import { clientLogin } from "../auth";
 import store from "../store";
@@ -224,6 +228,11 @@ export default {
           })
           .then((authData) => {
             clientLogin(authData.data.signIn.token);
+          })
+          .catch((e) => {
+            this.error = e;
+            this.isLoading = false;
+            this.dots = "display: block";
           });
       }
     },
@@ -232,10 +241,8 @@ export default {
   computed: {
     userPassError() {
       if (this.error) {
-        return (
-          this.error.code === "auth/wrong-password" ||
-          this.error.code === "auth/user-not-found"
-        );
+        // console.log(this.error);
+        return this.error.message === "GraphQL error: Incorrect credentials";
       } else return false;
     },
 

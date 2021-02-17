@@ -16,6 +16,7 @@
           <div class="form-group row">
             <div class="col-sm-3 offset-md-4">
               <input
+                id="discogs-id"
                 placeholder="Release ID"
                 type="text"
                 class="form-control"
@@ -23,6 +24,7 @@
               />
             </div>
             <button
+              id="ok-btn"
               type="button"
               style="height: 2rem; line-height: 1.2rem"
               @click="addFromDiscogs(discogsId)"
@@ -39,6 +41,7 @@
             <label class="col-sm-2 col-form-label">Title</label>
             <div class="col-sm-4">
               <input
+                id="title"
                 type="text"
                 class="form-control"
                 required
@@ -48,6 +51,7 @@
             <label class="col-sm-2 col-form-label">Condition</label>
             <div class="col-sm-4">
               <select
+                id="condition"
                 class="form-control col-sm-12"
                 v-model="form.condition"
                 required
@@ -68,6 +72,7 @@
             <label class="col-sm-2 col-form-label">Artist</label>
             <div class="col-sm-4">
               <input
+                id="artist"
                 type="text"
                 class="form-control"
                 required
@@ -82,11 +87,20 @@
           <div class="form-group row">
             <label class="col-sm-2 col-form-label">Label</label>
             <div class="col-sm-4">
-              <input type="text" class="form-control" v-model="form.label" />
+              <input
+                id="label"
+                type="text"
+                class="form-control"
+                v-model="form.label"
+              />
             </div>
             <label class="col-sm-2 col-form-label">Status</label>
             <div class="col-sm-4">
-              <select class="form-control col-sm-12" v-model="form.status">
+              <select
+                id="status"
+                class="form-control col-sm-12"
+                v-model="form.status"
+              >
                 <option value="inStock" selected>In Stock</option>
                 <option value="sold">Sold</option>
               </select>
@@ -95,21 +109,37 @@
           <div class="form-group row">
             <label class="col-sm-2 col-form-label">Genre</label>
             <div class="col-sm-4">
-              <input type="text" class="form-control" v-model="form.genre" />
+              <input
+                id="genre"
+                type="text"
+                class="form-control"
+                v-model="form.genre"
+              />
             </div>
             <label class="col-sm-2 col-form-label">Image URL</label>
             <div class="col-sm-4">
-              <input type="text" class="form-control" v-model="form.img_uri" />
+              <input
+                id="imgUrl"
+                type="text"
+                class="form-control"
+                v-model="form.img_uri"
+              />
             </div>
           </div>
           <div class="form-group row">
             <label class="col-sm-2 col-form-label">Year</label>
             <div class="col-sm-4">
-              <input type="number" class="form-control" v-model="form.year" />
+              <input
+                id="year"
+                type="number"
+                class="form-control"
+                v-model.number="form.year"
+              />
             </div>
             <label class="col-sm-2 col-form-label">Notes</label>
             <div class="col-sm-4">
               <textarea
+                id="notes"
                 maxlength="250"
                 style="resize: none"
                 rows="2"
@@ -121,6 +151,7 @@
           </div>
           <div class="text-right mt-4">
             <button
+              id="save-btn"
               type="submit"
               class="btn btn-dark"
               style="margin-right: 10px"

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div style="width: 85%; float:right">
+    <div style="width: 85%; float: right">
       <b-card class="col-lg-9 offset-lg-1 mt-5">
         <form
           @submit.prevent="submit"
@@ -34,11 +34,10 @@
           </div>
           <div class="row">
             <img
-              v-if="form.img_uri"
-              style="max-with:250px; max-height: 250px"
+              style="max-with: 250px; max-height: 250px"
               class="img img-responsive ml-4 mr-3 mb-4"
-              :src="form.img_uri"
-              alt=""
+              :src="form.img_uri || '/img/vinyl.png'"
+              alt="Artwork"
             />
             <div class="col">
               <div class="col-lg-12">
@@ -75,7 +74,7 @@
                 <div v-if="form.price" class="form-group row">
                   <label class="col-lg-4 col-form-label">Price: </label>
                   <div class="col form-control-plaintext">
-                    {{ form.price ? form.price + ' €' : '-' }}
+                    {{ form.price ? form.price + " €" : "-" }}
                   </div>
                 </div>
                 <div v-if="form.status" class="form-group row">
@@ -120,7 +119,7 @@
 </template>
 
 <script>
-import gql from 'graphql-tag';
+import gql from "graphql-tag";
 
 export default {
   data() {
@@ -151,7 +150,7 @@ export default {
   methods: {
     editRelease() {
       this.$router.push({
-        name: 'edit-release',
+        name: "edit-release",
         params: {
           id: this.form.id,
         },
@@ -171,11 +170,11 @@ export default {
           variables: {
             id: this.form.id,
           },
-          fetchPolicy: 'no-cache',
+          fetchPolicy: "no-cache",
         })
         .then(() => {
           this.$router.push({
-            name: 'collection',
+            name: "collection",
           });
         });
     },

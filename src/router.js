@@ -8,7 +8,6 @@ import ViewRelease from '@/components/ViewRelease'
 import Settings from '@/components/Settings'
 import Management from '@/components/Management'
 import Statistics from '@/components/Statistics'
-import 'firebase/auth';
 
 Vue.use(Router)
 
