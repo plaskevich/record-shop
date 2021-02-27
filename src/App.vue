@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Sidebar v-if="$route.path != '/login'" />
+    <Sidebar v-if="$route.path != '/login' && $route.path != '/signup' && $route.path != '/'" />
     <transition name="fade" mode="out-in">
       <router-view />
     </transition>

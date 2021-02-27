@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import store from './store';
 import Collection from '@/components/Collection'
+import Landing from '@/components/Landing'
 import Login from '@/components/Login'
 import EditRelease from '@/components/EditRelease'
 import ViewRelease from '@/components/ViewRelease'
@@ -16,7 +17,8 @@ const router = new Router({
   routes: [
     {
       path: '/',
-      redirect: 'collection'
+      name: 'landing',
+      component: Landing
     },
     {
       path: '/collection/:page?',
@@ -65,7 +67,7 @@ const router = new Router({
 })
 
 router.beforeEach((to, from, next) => {
-  if (!store.state.authenticated && to.path !== '/login') next('/login')
+  if (!store.state.authenticated && to.path !== '/login' && to.path !== '/signup' && to.path !== '/') next('/login')
   else next()
 })
 
