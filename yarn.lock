@@ -10448,6 +10448,11 @@ vue-hot-reload-api@^2.3.0:
   resolved "https://registry.yarnpkg.com/vue-hot-reload-api/-/vue-hot-reload-api-2.3.3.tgz#2756f46cb3258054c5f4723de8ae7e87302a1ccf"
   integrity sha512-KmvZVtmM26BQOMK1rwUZsrqxEGeKiYSZGA7SNWE6uExx8UX/cj9hq2MRV/wWC3Cq6AoeDGk57rL9YMFRel/q+g==
 
+vue-kinesis@^1.2.3:
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/vue-kinesis/-/vue-kinesis-1.2.3.tgz#56611e3f6db3ca30a60abd5b47848eb6a5252baa"
+  integrity sha512-/9pCCPRpaHnIyvvkBsCpAB5n1YKlJZV2u7bf1L1uPt/DlNRMfzzwoL0c9XAIPTV6fw7mnq+v7pOvfKprLjQCGw==
+
 "vue-loader-v16@npm:vue-loader@^16.1.0":
   version "16.1.2"
   resolved "https://registry.yarnpkg.com/vue-loader/-/vue-loader-16.1.2.tgz#5c03b6c50d2a5f983c7ceba15c50d78ca2b298f4"

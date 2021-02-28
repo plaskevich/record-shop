@@ -2,10 +2,10 @@
   <div class="body">
     <div class="navi">
       <div class="container flex">
-        <h3 class="brand">Record Shop</h3>
+        <router-link to="/"><h3 class="brand">Record Shop</h3></router-link>
         <ul>
-          <li><a href="#" class="login-btn">Login</a></li>
-          <li><a href="#" class="signup-btn">Sign Up</a></li>
+          <li><router-link to="/login">Login</router-link></li>
+          <li><router-link to="/signup">Sign Up</router-link></li>
         </ul>
       </div>
     </div>
@@ -19,11 +19,17 @@
         <span class="from content-text">from</span>
         <span class="discogs content-text">Discogs</span>
         <div class="rect2"></div>
-        <a href="#" class="sign-up-text">sign up for free now</a>
+        <div class="sign-up-block">
+          <router-link class="sign-up-text" to="/signup"
+            >sign up for free now</router-link
+          >
+        </div>
+        <!-- <a href="#" class="sign-up-text"><span></span></a> -->
       </div>
     </section>
   </div>
 </template>
+
 
 <style>
 * {
@@ -49,7 +55,7 @@ ul {
   align-items: center;
 }
 .brand {
-  font-size: 100px;
+  font-size: 90px;
   font-family: Helvetica;
   font-weight: bold;
   color: #f05454;
@@ -65,6 +71,7 @@ ul {
   font-weight: bold;
   padding: 20px;
   margin: 0 10px;
+  transition: color 0.3s;
 }
 
 .navi a:hover {
@@ -141,16 +148,20 @@ ul {
   z-index: 0;
 }
 
-.sign-up-text {
+.sign-up-block {
   font-size: 70px;
   display: flex;
   justify-content: center;
   margin-top: 40%;
+}
+
+.sign-up-text {
   color: #dddddd;
+  transition: color 0.3s;
 }
 
 .sign-up-text:hover {
-  color: #f05454;
   text-decoration: none;
+  color: #f05454;
 }
 </style>

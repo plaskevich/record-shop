@@ -1,172 +1,41 @@
 <template>
-  <div style="padding-top: 40px">
-    <h1 class="text-center" style="font-weight: 800">Record Shop</h1>
-    <b-form @submit.prevent="login" class="mt-5">
-      <b-card
-        bg-variant="light"
-        class="offset-lg-4 offset-md-3 offset-sm-2 offset-xs-1 col-lg-4 col-md-6 col-sm-8 col-xs-10"
-      >
-        <h3 class="text-center mt-4">Welcome!</h3>
-        <b-form-group
-          style="margin-top: 30px"
-          label="Email"
-          label-cols="12"
-          label-align="left"
-          label-for="email"
+  <div class="body">
+    <div class="navi">
+      <div class="container flex">
+        <router-link to="/"><h3 class="brand">Record Shop</h3></router-link>
+      </div>
+    </div>
+    <p class="text-center title mt-5">login</p>
+    <form @submit.prevent="login" class="mt-5">
+      <div class="form-group">
+        <label class="label" for="email">email</label>
+        <input id="email" required v-model="form.email" type="email" />
+      </div>
+      <div class="form-group">
+        <label class="label" for="password">password</label>
+        <input required type="password" v-model="form.password" id="password" />
+      </div>
+      <div>
+        <small
+          class="text-danger"
+          :style="
+            this.error && !userPassError ? ' display: block' : 'display: none'
+          "
         >
-          <b-form-input required v-model="form.email" id="email"></b-form-input>
-        </b-form-group>
-        <b-form-group
-          label="Password"
-          label-cols="12"
-          label-align="left"
-          label-for="password"
+          {{ error }}
+        </small>
+        <small
+          id="credentials-error"
+          :style="userPassError ? ' display: block' : 'display: none'"
+          class="text-danger"
         >
-          <b-form-input
-            required
-            type="password"
-            v-model="form.password"
-            id="password"
-          ></b-form-input>
-        </b-form-group>
-        <b-form-group>
-          <small class="text-danger" v-if="this.error && !userPassError">
-            {{ error }}
-          </small>
-          <small
-            id="credentials-error"
-            v-if="userPassError"
-            class="text-danger"
-          >
-            Wrong username or password
-          </small>
-          <button
-            id="submit"
-            type="submit"
-            :disabled="isLoading"
-            style="display: block; margin: 20px auto; height: 44px"
-            class="btn btn-dark col-sm-3"
-          >
-            <span :style="this.dots">SIGN IN</span>
-            <div v-if="this.isLoading" class="loader loader--style8">
-              <svg
-                version="1.1"
-                id="Layer_1"
-                xmlns="http://www.w3.org/2000/svg"
-                xmlns:xlink="http://www.w3.org/1999/xlink"
-                x="0px"
-                y="0px"
-                width="24px"
-                height="30px"
-                viewBox="0 0 24 30"
-                style="enable-background: new 0 0 50 50"
-                xml:space="preserve"
-              >
-                <rect
-                  x="0"
-                  y="10"
-                  width="4"
-                  height="10"
-                  fill="#333"
-                  opacity="0.2"
-                >
-                  <animate
-                    attributeName="opacity"
-                    attributeType="XML"
-                    values="0.2; 1; .2"
-                    begin="0s"
-                    dur="0.6s"
-                    repeatCount="indefinite"
-                  />
-                  <animate
-                    attributeName="height"
-                    attributeType="XML"
-                    values="10; 20; 10"
-                    begin="0s"
-                    dur="0.6s"
-                    repeatCount="indefinite"
-                  />
-                  <animate
-                    attributeName="y"
-                    attributeType="XML"
-                    values="10; 5; 10"
-                    begin="0s"
-                    dur="0.6s"
-                    repeatCount="indefinite"
-                  />
-                </rect>
-                <rect
-                  x="8"
-                  y="10"
-                  width="4"
-                  height="10"
-                  fill="#333"
-                  opacity="0.2"
-                >
-                  <animate
-                    attributeName="opacity"
-                    attributeType="XML"
-                    values="0.2; 1; .2"
-                    begin="0.15s"
-                    dur="0.6s"
-                    repeatCount="indefinite"
-                  />
-                  <animate
-                    attributeName="height"
-                    attributeType="XML"
-                    values="10; 20; 10"
-                    begin="0.15s"
-                    dur="0.6s"
-                    repeatCount="indefinite"
-                  />
-                  <animate
-                    attributeName="y"
-                    attributeType="XML"
-                    values="10; 5; 10"
-                    begin="0.15s"
-                    dur="0.6s"
-                    repeatCount="indefinite"
-                  />
-                </rect>
-                <rect
-                  x="16"
-                  y="10"
-                  width="4"
-                  height="10"
-                  fill="#333"
-                  opacity="0.2"
-                >
-                  <animate
-                    attributeName="opacity"
-                    attributeType="XML"
-                    values="0.2; 1; .2"
-                    begin="0.3s"
-                    dur="0.6s"
-                    repeatCount="indefinite"
-                  />
-                  <animate
-                    attributeName="height"
-                    attributeType="XML"
-                    values="10; 20; 10"
-                    begin="0.3s"
-                    dur="0.6s"
-                    repeatCount="indefinite"
-                  />
-                  <animate
-                    attributeName="y"
-                    attributeType="XML"
-                    values="10; 5; 10"
-                    begin="0.3s"
-                    dur="0.6s"
-                    repeatCount="indefinite"
-                  />
-                </rect>
-              </svg>
-            </div>
-          </button>
-        </b-form-group>
-      </b-card>
-    </b-form>
+          Wrong username or password
+        </small>
+        <div class="text-center btn-wrap">
+          <button id="submit" type="submit" class="signInBtn">sign in</button>
+        </div>
+      </div>
+    </form>
   </div>
 </template>
 
@@ -180,7 +49,6 @@ export default {
   data() {
     return {
       error: null,
-      isLoading: false,
       dots: "",
       form: {
         email: "",
@@ -254,6 +122,66 @@ export default {
 </script>
 
 <style lang="scss" scopedSlots>
+.title {
+  font-size: 36px;
+  color: #dddddd;
+  font-family: Helvetica;
+  font-weight: bold;
+}
+
+form {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.label {
+  font-family: Helvetica-Bold;
+  font-size: 48px;
+  color: #dddddd;
+  text-align: right;
+  align-items: center;
+  padding-right: 60px;
+  width: 40%;
+}
+
+input {
+  width: 60%;
+  font-family: Helvetica-Bold;
+  font-size: 48px;
+  color: #f05454;
+  background: #191919;
+  border: none;
+  border-bottom: 2px solid #dddddd;
+  transition: border 0.3s;
+}
+input:focus {
+  outline: none;
+  border-bottom: 2px solid #f05454;
+}
+
+.form-group {
+  padding-top: 50px;
+}
+
+.signInBtn {
+  color: #f05454;
+  background: none;
+  font-family: Helvetica-Bold;
+  font-size: 60px;
+  border: none;
+  transition: opacity 0.1s;
+  transition: color 0.1s;
+}
+
+.signInBtn:focus {
+  outline: none;
+  opacity: 0.8;
+}
+
+.btn-wrap {
+  padding-top: 90px;
+}
+
 @keyframes dot-keyframes {
   0% {
     opacity: 0.4;

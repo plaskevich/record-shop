@@ -12,6 +12,9 @@ import 'vue-sidebar-menu/dist/vue-sidebar-menu.css'
 import Vuelidate from 'vuelidate'
 import './assets/style.css'
 import VueApexCharts from 'vue-apexcharts'
+import VueKinesis from 'vue-kinesis'
+
+Vue.use(VueKinesis)
 
 Vue.use(VueApexCharts)
 Vue.component('apexchart', VueApexCharts)
