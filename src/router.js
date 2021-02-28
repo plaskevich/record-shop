@@ -4,6 +4,7 @@ import store from './store';
 import Collection from '@/components/Collection'
 import Landing from '@/components/Landing'
 import Login from '@/components/Login'
+import SignUp from '@/components/SignUp'
 import EditRelease from '@/components/EditRelease'
 import ViewRelease from '@/components/ViewRelease'
 import Settings from '@/components/Settings'
@@ -30,6 +31,11 @@ const router = new Router({
       path: '/login',
       name: 'login',
       component: Login
+    },
+    {
+      path: '/signup',
+      name: 'signup',
+      component: SignUp
     },
     {
       path: '/new',

@@ -11,8 +11,13 @@
     </div>
     <section class="content">
       <div class="container">
-        <span class="my content-text">manage your</span>
-        <span class="rs content-text">record store</span>
+        <transition name="transright" mode="out-in">
+          <span class="my content-text">manage your</span>
+        </transition>
+        <transition name="transleft" mode="out-in">
+          <span class="rs content-text">record store</span>
+        </transition>
+
         <span class="inv content-text">inventory</span>
         <div class="rect1"></div>
         <span class="id content-text">import directly</span>
@@ -35,9 +40,11 @@
 * {
   box-sizing: border-box;
 }
-.body {
+body {
   background-color: #191919;
-  height: 100vh;
+}
+.body {
+  min-height: 100hv;
 }
 .container {
   max-width: 1440px;

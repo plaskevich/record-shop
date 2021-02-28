@@ -10,7 +10,7 @@
         ></b-form-input>
         <button
           type="button"
-          class="btn btn-link text-dark pt-0 ml-3"
+          class="btn btn-link text-light pt-0 ml-3"
           @click="selectToggle = !selectToggle"
         >
           {{ selectToggle ? "Cancel" : "Select" }}
@@ -57,7 +57,7 @@
         <b-table
           @row-clicked="rowClick"
           no-sort-reset
-          style="cursor: pointer; margin-bottom: 60px"
+          style="cursor: pointer; margin-bottom: 60px; color: #dddddd"
           :tbody-tr-class="rowClass"
           :items="items"
           :fields="fields"
@@ -68,6 +68,7 @@
           borderless
           striped
           hover
+          dark
           head-variant="dark"
         >
           <!-- eslint-disable-next-line vue/no-unused-vars -->
@@ -268,7 +269,7 @@ export default {
     rowClass(item) {
       if (!item) return;
       if (item.status === "sold" && !this.$route.params.page) {
-        return "table-warning releaseRow";
+        return "table-warning releaseRow  text-dark";
       } else {
         return "releaseRow";
       }
@@ -476,4 +477,5 @@ export default {
 };
 </script>
 
-<style lang="css"></style>
+<style lang="css" scoped>
+</style>
