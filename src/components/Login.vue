@@ -1,11 +1,6 @@
 <template>
-  <div class="body">
-    <div class="navi">
-      <div class="container flex">
-        <router-link to="/"><h3 class="brand">Record Shop</h3></router-link>
-      </div>
-    </div>
-    <p class="text-center title mt-5">login</p>
+  <div class="landing-side">
+    <h3>LOGIN</h3>
     <form @submit.prevent="login" class="mt-5">
       <div class="form-group">
         <label class="label" for="email">email</label>
@@ -30,7 +25,7 @@
           Wrong username or password
         </h4>
         <div class="text-center btn-wrap">
-          <button id="submit" type="submit" class="signInBtn">sign in</button>
+          <button id="submit" type="submit" class="signInBtn">enter</button>
         </div>
       </div>
     </form>
@@ -119,33 +114,33 @@ export default {
 };
 </script>
 
-<style lang="scss" scopedSlots>
-.title {
-  font-size: 36px;
-  color: #dddddd;
-  font-family: Helvetica;
-  font-weight: bold;
-}
-
+<style lang="scss" scoped>
 form {
   max-width: 700px;
   margin: 0 auto;
+  padding-top: 50px;
 }
 
+h3 {
+  text-align: center;
+  font-family: Helvetica-Bold;
+  font-size: 25px;
+  color: #dddddd;
+}
 .label {
   font-family: Helvetica-Bold;
-  font-size: 48px;
+  font-size: 20px;
   color: #dddddd;
   text-align: right;
   align-items: center;
-  padding-right: 60px;
-  width: 40%;
+  padding-right: 40px;
+  width: 30%;
 }
 
 input {
-  width: 60%;
+  width: 50%;
   font-family: Helvetica-Bold;
-  font-size: 48px;
+  font-size: 20px;
   color: #f05454;
   background: #191919;
   border: none;
@@ -165,7 +160,7 @@ input:focus {
   color: #f05454;
   background: none;
   font-family: Helvetica-Bold;
-  font-size: 60px;
+  font-size: 30px;
   border: none;
   transition: opacity 0.1s;
   transition: color 0.1s;
@@ -174,56 +169,5 @@ input:focus {
 .signInBtn:focus {
   outline: none;
   opacity: 0.8;
-}
-
-.btn-wrap {
-  // padding-top: 10px;
-}
-
-@keyframes dot-keyframes {
-  0% {
-    opacity: 0.4;
-    transform: scale(1, 1);
-  }
-
-  50% {
-    opacity: 1;
-    transform: scale(1.2, 1.2);
-  }
-
-  100% {
-    opacity: 0.4;
-    transform: scale(1, 1);
-  }
-}
-
-.bloading-dots {
-  text-align: center;
-  width: 100%;
-
-  &--dot {
-    animation: dot-keyframes 1.5s infinite ease-in-out;
-    background-color: #fff;
-    border-radius: 10px;
-    display: inline-block;
-    height: 6px;
-    width: 6px;
-    margin-bottom: 2px;
-
-    &:nth-child(1) {
-      margin-right: 2px;
-      margin-left: 18px;
-    }
-
-    &:nth-child(2) {
-      animation-delay: 0.5s;
-      margin-right: 2px;
-    }
-
-    &:nth-child(3) {
-      animation-delay: 1s;
-      margin-right: 18px;
-    }
-  }
 }
 </style>

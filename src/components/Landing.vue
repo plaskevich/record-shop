@@ -3,51 +3,37 @@
     <div class="navi">
       <div class="container flex">
         <router-link to="/"><h3 class="brand">Record Shop</h3></router-link>
-        <ul>
-          <li><router-link to="/login">Login</router-link></li>
-          <li><router-link to="/signup">Sign Up</router-link></li>
-        </ul>
       </div>
     </div>
-    <section class="content">
-      <div class="container">
-        <transition name="transright" mode="out-in">
-          <span class="my content-text">manage your</span>
-        </transition>
-        <transition name="transleft" mode="out-in">
-          <span class="rs content-text">record store</span>
-        </transition>
-
-        <span class="inv content-text">inventory</span>
-        <div class="rect1"></div>
-        <span class="id content-text">import directly</span>
-        <span class="from content-text">from</span>
-        <span class="discogs content-text">Discogs</span>
-        <div class="rect2"></div>
-        <div class="sign-up-block">
-          <router-link class="sign-up-text" to="/signup"
-            >sign up for free now</router-link
-          >
-        </div>
-        <!-- <a href="#" class="sign-up-text"><span></span></a> -->
-      </div>
-    </section>
+    <div class="container content">
+      <Login />
+      <SignUp />
+    </div>
   </div>
 </template>
 
+<script>
+import Login from "./Login";
+import SignUp from "./SignUp";
 
-<style>
-* {
-  box-sizing: border-box;
+export default {
+  components: { Login, SignUp },
+};
+</script>
+
+
+<style scoped>
+.landing-side {
+  width: 100%;
+  padding-top: 150px;
 }
-body {
-  background-color: #191919;
-}
+
 .body {
-  min-height: 100hv;
+  background-color: #191919;
+  height: 100vh;
 }
 .container {
-  max-width: 1440px;
+  max-width: 80%;
   margin: 0 auto;
 }
 
@@ -62,7 +48,7 @@ ul {
   align-items: center;
 }
 .brand {
-  font-size: 90px;
+  font-size: 50px;
   font-family: Helvetica;
   font-weight: bold;
   color: #f05454;
@@ -89,6 +75,8 @@ ul {
   color: #dddddd;
   font-family: Helvetica;
   font-weight: bold;
+  display: flex;
+  justify-content: space-evenly;
 }
 
 .content-text {

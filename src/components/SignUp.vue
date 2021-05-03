@@ -1,11 +1,6 @@
 <template>
-  <div class="body">
-    <div class="navi">
-      <div class="container flex">
-        <router-link to="/"><h3 class="brand">Record Shop</h3></router-link>
-      </div>
-    </div>
-    <p class="text-center title">create new account</p>
+  <div class="landing-side">
+    <h3>Sign Up</h3>
     <form @submit.prevent="signUp">
       <div class="form-group">
         <label class="label" for="email">email</label>
@@ -36,7 +31,7 @@
           {{ error }}
         </small>
         <div class="text-center btn-wrap">
-          <button id="submit" type="submit" class="signInBtn">sign up</button>
+          <button id="submit" type="submit" class="signInBtn">continue</button>
         </div>
       </div>
     </form>
@@ -118,7 +113,6 @@ export default {
   computed: {
     userPassError() {
       if (this.error) {
-        // console.log(this.error);
         return this.error.message === "GraphQL error: Incorrect credentials";
       } else return false;
     },
@@ -130,33 +124,34 @@ export default {
 };
 </script>
 
-<style lang="scss" scopedSlots>
-.title {
+<style lang="scss" scoped>
+h3 {
   font-size: 30px;
   color: #dddddd;
   font-family: Helvetica;
   font-weight: bold;
+  text-align: center;
 }
 
 form {
-  max-width: 1000px;
-  margin: 2% 15%;
+  max-width: 700px;
+  padding-top: 30px;
 }
 
 .label {
   font-family: Helvetica-Bold;
-  font-size: 36px;
+  font-size: 20px;
   color: #dddddd;
   text-align: right;
   align-items: center;
-  padding-right: 60px;
-  width: 50%;
+  padding-right: 40px;
+  width: 30%;
 }
 
 input {
   width: 50%;
   font-family: Helvetica-Bold;
-  font-size: 36px;
+  font-size: 20px;
   color: #f05454;
   background: #191919;
   border: none;
@@ -176,7 +171,7 @@ input:focus {
   color: #f05454;
   background: none;
   font-family: Helvetica-Bold;
-  font-size: 60px;
+  font-size: 30px;
   border: none;
   transition: opacity 0.1s;
   transition: color 0.1s;
@@ -189,52 +184,5 @@ input:focus {
 
 .btn-wrap {
   padding-top: 40px;
-}
-
-@keyframes dot-keyframes {
-  0% {
-    opacity: 0.4;
-    transform: scale(1, 1);
-  }
-
-  50% {
-    opacity: 1;
-    transform: scale(1.2, 1.2);
-  }
-
-  100% {
-    opacity: 0.4;
-    transform: scale(1, 1);
-  }
-}
-
-.bloading-dots {
-  text-align: center;
-  width: 100%;
-
-  &--dot {
-    animation: dot-keyframes 1.5s infinite ease-in-out;
-    background-color: #fff;
-    border-radius: 10px;
-    display: inline-block;
-    height: 6px;
-    width: 6px;
-    margin-bottom: 2px;
-
-    &:nth-child(1) {
-      margin-right: 2px;
-      margin-left: 18px;
-    }
-
-    &:nth-child(2) {
-      animation-delay: 0.5s;
-      margin-right: 2px;
-    }
-
-    &:nth-child(3) {
-      animation-delay: 1s;
-      margin-right: 18px;
-    }
-  }
 }
 </style>
