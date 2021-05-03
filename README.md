@@ -1,9 +1,12 @@
 # Record Shop
 
-This is a web app used for managing inventory in a record shop.
+This app allows you to keep data of your record store conveniently.
 
-A record data can be added manually or imported from [Discogs](https://www.discogs.com/) (one of the biggest music databases).
+Simply sign in or sign up, after that you will see the collection of records in your store. You can set them sold or available (sold records are displayed in the table in yellow).
 
+You can add records to your collection either by filling the form manually or importing data from [Discogs](https://www.discogs.com/) (one of the biggest music databases). To do that copy the release ID from Discogs and paste it in the form.
+
+**Server side of the app you can find [here](https://github.com/plaskevich/record-shop-server).**
 
 ## Run app locally
 In order to use it locally, run the server first.
@@ -11,14 +14,13 @@ In order to use it locally, run the server first.
 Server itself and instructions you can find [here](https://github.com/plaskevich/record-shop-server).
 ### 1. Install dependencies
 `yarn install`
-### 2. Set credentials
-1. In the root of the project create a file named `.env`
-2. Set the `.env` file with credentials:
-```
-VUE_APP_GRAPHQL_HTTP=<server_url>
-```
-Replace `<server_url>` with the URL of the server that should be running also locally (e.g. http://localhost:3000/)
 
-### 3. Start app
+### 2. Start app
 `yarn serve`
 
+## Testing
+In order to test the app you can use following credentials to sign in:
+```
+email: test@user.com
+password: simplepass
+```
