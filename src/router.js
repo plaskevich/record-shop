@@ -8,6 +8,7 @@ import ViewRelease from '@/components/ViewRelease';
 import Settings from '@/components/Settings';
 import Management from '@/components/Management';
 import Statistics from '@/components/Statistics';
+import Error from '@/components/Error';
 
 Vue.use(Router);
 
@@ -56,6 +57,10 @@ const router = new Router({
       path: '/statistics',
       name: 'statistics',
       component: Statistics,
+    },
+    {
+      path: '/*',
+      component: Error,
     },
   ],
 });
