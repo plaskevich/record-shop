@@ -1,3 +1,3 @@
 export default {
-  graphqlURL: process.env.VUE_APP_GRAPHQL_HTTP,
+  graphqlURL: 'https://record-shop-server.herokuapp.com/',
 };
